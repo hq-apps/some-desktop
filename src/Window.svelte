@@ -66,7 +66,7 @@
         padding: 0 10px;
         background: rgba($color: #fff, $alpha: 0.5);
         backdrop-filter: blur(10px);
-        padding: 16px;
+        padding: 12px;
 
         p {
             margin: 0;
@@ -79,8 +79,8 @@
         }
 
         .action-button {
-            width: 25px;
-            height: 25px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             cursor: pointer;
         }
