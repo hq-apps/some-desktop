@@ -82,11 +82,7 @@
             width: 25px;
             height: 25px;
             border-radius: 50%;
-            background-color: red;
             cursor: pointer;
-            &:hover {
-                background-color: rgb(255, 62, 62);
-            }
         }
 
         .close {
