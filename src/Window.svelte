@@ -34,9 +34,13 @@
     <div class="title draggable" on:mousedown={onMouseDown}>
         <p>EPIK</p>
         <div class="action">
-            <p class="close" on:click={onClose} on:keydown={onClose}></p>
-            <p class="maximize"></p>
-            <p class="minimize"></p>
+            <p
+                class="action-button close"
+                on:click={onClose}
+                on:keydown={onClose}
+            />
+            <p class="action-button maximize" />
+            <p class="action-button minimize" />
         </div>
     </div>
     <div class="content">
@@ -51,7 +55,7 @@
         user-select: none;
         display: flex;
         flex-direction: column;
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         border-radius: 22px;
         overflow: hidden;
     }
@@ -60,7 +64,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 10px;
-        background: rgba($color: #FFF, $alpha: 0.5);
+        background: rgba($color: #fff, $alpha: 0.5);
         backdrop-filter: blur(10px);
         padding: 16px;
 
@@ -74,7 +78,7 @@
             gap: 8px;
         }
 
-        .close {
+        .action-button {
             width: 25px;
             height: 25px;
             border-radius: 50%;
@@ -85,28 +89,26 @@
             }
         }
 
-        .maximize {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background-color: greenyellow;
-            cursor: pointer;
+        .close {
+            background-color: red;
             &:hover {
-                background-color: rgb(208, 255, 138);
+                background-color: lighten(red, 20);
+            }
+        }
+
+        .maximize {
+            background-color: greenyellow;
+            &:hover {
+                background-color: lighten(greenyellow, 20);
             }
         }
 
         .minimize {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
             background-color: yellow;
-            cursor: pointer;
             &:hover {
-                background-color: rgb(255, 255, 80);
+                background-color: lighten(yellow, 20);
             }
         }
-
     }
 
     .content {
