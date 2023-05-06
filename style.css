@@ -4,9 +4,19 @@
 
 .title {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0 10px;
     align-content: center;
     align-items: center;
-    background: rgb(2,0,36);
-    background: linear-gradient(229deg, rgba(2,0,36,1) 0%, rgba(243,255,0,1) 100%); ;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(229deg, rgba(2, 0, 36, 1) 0%, rgba(243, 255, 0, 1) 100%);
+}
+
+.close:hover {
+    cursor: pointer;
+    color: white;
+}
+
+p {
+    margin: 0;
 }
