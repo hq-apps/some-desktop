@@ -34,7 +34,9 @@
     <div class="title draggable" on:mousedown={onMouseDown}>
         <p>EPIK</p>
         <div class="action">
-            <p class="close" on:click={onClose} on:keydown={onClose}>X</p>
+            <p class="close" on:click={onClose} on:keydown={onClose}></p>
+            <p class="maximize"></p>
+            <p class="minimize"></p>
         </div>
     </div>
     <div class="content">
@@ -47,31 +49,68 @@
 <style lang="scss">
     [class^="window"] {
         user-select: none;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Inter', sans-serif;
+        border-radius: 22px;
+        overflow: hidden;
     }
     .title {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0 10px;
-        background: rgb(131, 58, 180);
-        background: linear-gradient(
-            90deg,
-            rgba(131, 58, 180, 1) 0%,
-            rgba(253, 29, 29, 1) 50%,
-            rgba(252, 176, 69, 1) 100%
-        );
+        background: rgba($color: #FFF, $alpha: 0.5);
+        backdrop-filter: blur(10px);
+        padding: 16px;
 
         p {
             margin: 0;
         }
 
-        .close:hover {
-            color: white;
-            cursor: pointer;
+        .action {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 8px;
         }
+
+        .close {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: red;
+            cursor: pointer;
+            &:hover {
+                background-color: rgb(255, 62, 62);
+            }
+        }
+
+        .maximize {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: greenyellow;
+            cursor: pointer;
+            &:hover {
+                background-color: rgb(208, 255, 138);
+            }
+        }
+
+        .minimize {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: yellow;
+            cursor: pointer;
+            &:hover {
+                background-color: rgb(255, 255, 80);
+            }
+        }
+
     }
 
     .content {
-        background-color: antiquewhite;
+        margin: 0;
+        background-color: white;
     }
 </style>
