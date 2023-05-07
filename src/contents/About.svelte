@@ -1,2 +1,2 @@
-<h1>LOL LOOK AT THIS FUNNY</h1>
+<h1>MEC OS XXX Compooper</h1>
 <img src="/notz.png" alt="icon">

@@ -3,14 +3,18 @@
     import { scale } from "svelte/transition";
     const dispatch = createEventDispatcher();
 
+    type TypeAction = "close" | "launch" | "focus" | "max"
+
     export let id: string;
     export let title: string;
     export let windowIcon: string;
+    export let zindex: number = 0;
+    export let closeOnly: boolean;
 
     export let left = screen.width / 2 - 100;
     export let top = screen.height / 2 - 100;
-    let width: number = 200;
-    let height: number = 300;
+    export let width: number = 300
+    export let height: number = 400
 
     let moving = false;
     let maximized = false;
@@ -28,7 +32,7 @@
         right: number;
         top: number;
         bottom: number;
-    };
+    }
 
     function onMouseMove(e: MouseEvent) {
         if (moving) {
@@ -66,8 +70,8 @@
         }
     }
 
-    function onClose() {
-        dispatch("message", { id });
+    function trigger(type: TypeAction, value?: any) {
+        dispatch("message", { id, type, value });
     }
 
     let resizing = false;
@@ -131,10 +135,12 @@
 <div
     class="window-{id} {maximized ? 'max' : ''}"
     id="window-{id}"
-    style="left: {left}px; top: {top}px; width: {width}px; height: {height}px;"
+    style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {zindex}"
     transition:scale
+    on:mousedown={() => trigger("focus")}
 >
     <div class="title draggable" on:mousedown={onMouseDown}>
+        <p>{id}</p><br>
         {#if windowIcon}
             <img src={windowIcon} alt="icon">
         {/if}
@@ -142,15 +148,17 @@
         <div class="action">
             <p
                 class="action-button close"
-                on:click={onClose}
-                on:keydown={onClose}
+                on:click={() => trigger("close")}
+                on:keydown={() => trigger("close")}
             />
+            {#if !closeOnly}
             <p
                 class="action-button maximize"
                 on:click={onMaximize}
                 on:keydown={onMaximize}
             />
             <p class="action-button minimize" />
+            {/if}
         </div>
     </div>
     <div class="content">
@@ -231,7 +239,6 @@
         flex-direction: column;
         font-family: "Inter", sans-serif;
         border-radius: 15px;
-        overflow: hidden;
         box-shadow:
             0px 6.4px 13.8px rgba(0, 0, 0, 0.02),
             0px 12.9px 24.1px rgba(0, 0, 0, 0.028),
@@ -240,6 +247,14 @@
             0px 46.4px 46.9px rgba(0, 0, 0, 0.05),
             0px 100px 80px rgba(0, 0, 0, 0.07)
         ;
+
+        &:not(.content) {
+            overflow: hidden;
+        }
+
+        .content {
+            overflow: scroll;
+        }
     }
     .title {
         display: flex;
@@ -268,7 +283,6 @@
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            cursor: pointer;
         }
 
         .close {
@@ -290,6 +304,12 @@
             &:hover {
                 background-color: lighten(yellow, 20);
             }
+        }
+    }
+
+    @media(max-width: 1366px) {
+        .title {
+            padding: 5px;
         }
     }
 
@@ -375,15 +395,6 @@
         right: -10px;
         cursor: se-resize;
         border-radius: 100%;
-    }
-
-    :global(.hide-grabber .grabber) {
-        background: transparent !important;
-        border: none !important;
-    }
-
-    :global(.grabber.selected) {
-        border: solid 1px black;
     }
 
     .max {

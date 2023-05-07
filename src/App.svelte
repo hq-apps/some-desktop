@@ -3,29 +3,133 @@
     import Window from "./Window.svelte";
     import Welcome from "./contents/Welcome.svelte";
     import Dock from "./Dock.svelte";
+    import Welcome2 from "./contents/Welcome2.svelte";
+    import Panel from "./Panel.svelte";
+    import About from "./contents/About.svelte";
+    import { writable, type Writable } from "svelte/store";
 
-    let arrayOfWindows: Array<{ id: string;title: string, windowIcon?: string, dockIcon: string, com: typeof SvelteComponent }> = [];
-
-    function onUpdate(event?: { detail: { id: string } }) {
-        if (!event) return;
-        arrayOfWindows = arrayOfWindows.filter((m) => m.id != event.detail.id);
+    interface WindowProperties {
+        id: string;
+        title: string;
+        windowIcon: string;
+        dockIcon: string;
+        com: typeof SvelteComponent;
+        zindex: number;
+        closeOnly: boolean;
+        left: number,
+        top: number,
+        width: number,
+        height: number
     }
 
-    function newWindow(component?: typeof SvelteComponent) {
-        const id = Date.now().toString();
-        arrayOfWindows = [...arrayOfWindows, { id, dockIcon: "/notz.png", title: "EPIK", windowIcon: "/notz.png", com: component || Welcome }];
-        arrayOfWindows = [...arrayOfWindows, { id: (parseInt(id)+1).toString(), dockIcon: "/notz.png", title: "EPIK", com: component || Welcome }];
+    interface WindowOption {
+        title: string;
+        windowIcon?: string;
+        dockIcon: string;
+        closeOnly?: boolean;
+        com?: typeof SvelteComponent;
+    }
+    // I STILL DON'T UNDERSTAND
+    let arrayOfWindows: Writable<Array<WindowProperties>> = writable([]);
+
+    let currentZ = 10;
+    let currentWindow: WindowProperties;
+
+    type TypeAction = "close" | "launch" | "focus";
+
+    function onUpdate(event?: { detail: { id: string; type: TypeAction } }) {
+        if (!event) return;
+        switch (event.detail.type) {
+            case "close":
+                console.log(event.detail.id);
+                console.log($arrayOfWindows);
+                const filtered = $arrayOfWindows.filter(m => m.id != event.detail.id)
+                arrayOfWindows.set(filtered)
+                // if (arrayOfWindows. === 1) { //hellish code dont use
+                //     arrayOfWindows = [];
+                // } else {
+                //     // do you really try to hard check this shit lmao
+                //     arrayOfWindows = arrayOfWindows.filter(
+                //         (m) => m.id !== event.detail.id
+                //     );
+                // }
+                console.log($arrayOfWindows);
+                break;
+            case "launch":
+                newWindow();
+                break;
+            case "focus":
+                for (let i = 0; i < $arrayOfWindows.length; i++) {
+                    const elm = $arrayOfWindows[i];
+                    if (elm.id == event.detail.id) {
+                        currentWindow = elm;
+                        $arrayOfWindows[i].zindex = currentZ++;
+                    }
+                }
+                break;
+        }
+    }
+
+    function newWindow(opt?: WindowOption) {
+        const id =
+            Date.now().toString() +
+            (Math.random() * 1000).toString(4).slice(0, 4);
+        $arrayOfWindows = [
+            ...$arrayOfWindows,
+            {
+                id,
+                com: opt?.com || Welcome,
+                zindex: currentZ++,
+                dockIcon: opt?.dockIcon || "/notz.png",
+                title: opt?.title || "Sample Title",
+                windowIcon: opt?.windowIcon || "/notz.png",
+                closeOnly: !opt.closeOnly ? false : opt.closeOnly,
+                width: 400,
+                height: 600,
+                top: screen.width / 2 - 100,
+                left: screen.width / 2 - 100
+            },
+        ];
+        currentWindow = $arrayOfWindows.at(-1);
+    }
+
+    function showAbout() {
+        newWindow({
+            com: About,
+            title: "About MEC OS XXX",
+            dockIcon: "//hqapps.org/icens/96.png",
+            closeOnly: true,
+        });
     }
 
     setTimeout(() => {
         newWindow();
+        setTimeout(() => {
+            newWindow({
+                dockIcon: "/notz.png",
+                title: "EPIK",
+                com: Welcome2,
+            });
+        }, 300);
     }, 2000);
 </script>
 
-{#each arrayOfWindows as w}
-    <Window id={w.id} on:message={onUpdate} title={w.title} windowIcon={w.windowIcon || null}>
+<Panel
+    title={!currentWindow?.title ? "Desktop" : currentWindow.title}
+    on:about={showAbout}
+/>
+
+{#each $arrayOfWindows as w}
+    <Window
+        id={w.id}
+        on:message={onUpdate}
+        title={w.title}
+        windowIcon={w.windowIcon || null}
+        zindex={w.zindex}
+        closeOnly={w.closeOnly}
+    >
         <svelte:component this={w.com} prop={{}} />
     </Window>
 {/each}
 
-<Dock windows={arrayOfWindows}></Dock>
+<Dock windows={$arrayOfWindows} on:message={onUpdate} />

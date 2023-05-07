@@ -1,43 +1,73 @@
 <script lang="ts">
-    export let windows
+    import { SvelteComponent, createEventDispatcher } from "svelte";
+    
+    interface WindowProperties {
+        id: string;
+        title: string;
+        windowIcon: string;
+        dockIcon: string;
+        com: typeof SvelteComponent;
+        zindex: number;
+    }
+
+    export let windows: Array<WindowProperties>;
+
+    const dispatch = createEventDispatcher();
+    
+    function handleFocus(id: string) {
+        dispatch("message", {
+            id,
+            type: "focus"
+        })
+    }
 </script>
 
 <div class="dock">
     {#each windows as w}
-    <div class="dock-icon">
-        <img src="{w.dockIcon}" alt="">
-    </div>
+        <div class="dock-icon" on:click={() => handleFocus(w.id)} on:keydown={() => handleFocus(w.id)}>
+            <img src={w.dockIcon} alt="dock" />
+        </div>
     {/each}
 </div>
 
 <style lang="scss">
     @keyframes pop {
         from {
-            width: 0;
-            height: 0;
+            scale: 0;
         }
         to {
-            width: 96px;
-            height: 96px;
+           scale: 1;
         }
     }
 
     .dock {
+        --icon-size: 96px;
+        --border-radius: 40px;
+        --padding: 9px;
         display: flex;
-        gap: 9px;
-        padding: 9px;
-        background-color: rgba($color: #FFF, $alpha: 0.5);
-        border-radius: 40px;
+        gap: var(--padding);
+        padding: var(--padding);
+        background-color: rgba($color: #fff, $alpha: 0.5);
+        border-radius: var(--border-radius);
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
 
         .dock-icon {
-            width: 96px;
-            height: 96px;
+            width: var(--icon-size);
+            height: var(--icon-size);
             background-color: red;
-            border-radius: 31px;
+            border-radius: calc(var(--border-radius) - var(--padding));
             animation: pop 250ms;
             overflow: hidden;
+            transition: scale 150ms;
+
+            &:hover {
+                scale: 1.05;
+            }
+
+            &:active {
+                scale: 0.95;
+            }
 
             img {
                 width: 100%;
@@ -50,5 +80,14 @@
         left: 50%;
         transform: translateX(-50%);
         backdrop-filter: blur(12px);
+        z-index: 100000;
+    }
+
+    @media(max-width: 1366px) {
+        .dock {
+            --icon-size: 64px;
+            --border-radius: 30px;
+            --padding: 8px;
+        }
     }
 </style>
