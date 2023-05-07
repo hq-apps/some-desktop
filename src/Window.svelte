@@ -4,6 +4,8 @@
     const dispatch = createEventDispatcher();
 
     export let id: string;
+    export let title: string;
+    export let windowIcon: string;
 
     export let left = screen.width / 2 - 100;
     export let top = screen.height / 2 - 100;
@@ -133,7 +135,10 @@
     transition:scale
 >
     <div class="title draggable" on:mousedown={onMouseDown}>
-        <p>EPIK</p>
+        {#if windowIcon}
+            <img src={windowIcon} alt="icon">
+        {/if}
+        <p>{title}</p>
         <div class="action">
             <p
                 class="action-button close"
@@ -237,6 +242,10 @@
         backdrop-filter: blur(10px);
         padding: 10px;
 
+        img {
+            width: 24px;
+            height: 24px;
+        }
         p {
             margin: 0;
         }
