@@ -4,11 +4,13 @@
     const dispatch = createEventDispatcher();
     export let title: string;
 
-    let date = DateTime.now().toFormat("EEE hh:mm a");
+    // Sun May 05 11:38 PM
+    const format = "EEE LLL MM hh:mm a";
+    let date = DateTime.now().toFormat(format);
 
     setInterval(() => {
-        date = DateTime.now().toFormat("EEE hh:mm a");
-    }, 750);
+        date = DateTime.now().toFormat(format);
+    }, 2000);
 
     function showAbout() {
         dispatch("about");

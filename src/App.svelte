@@ -16,11 +16,11 @@
         com: typeof SvelteComponent;
         zindex: number;
         closeOnly: boolean;
-        left: number,
-        top: number,
-        width: number,
-        height: number,
-        closed?: boolean
+        left: number;
+        top: number;
+        width: number;
+        height: number;
+        closed?: boolean;
     }
 
     interface WindowOption {
@@ -44,13 +44,13 @@
             case "close":
                 console.log(event.detail.id);
                 console.log($arrayOfWindows);
-                const filtered = $arrayOfWindows.map(m => {
-                    if(m.id == event.detail.id) {
-                        m.closed = true
+                const filtered = $arrayOfWindows.map((m) => {
+                    if (m.id == event.detail.id) {
+                        m.closed = true;
                     }
-                    return m
-                })
-                arrayOfWindows.set(filtered)
+                    return m;
+                });
+                arrayOfWindows.set(filtered);
                 // if (arrayOfWindows. === 1) { //hellish code dont use
                 //     arrayOfWindows = [];
                 // } else {
@@ -93,7 +93,7 @@
                 width: 400,
                 height: 600,
                 top: screen.width / 2 - 100,
-                left: screen.width / 2 - 100
+                left: screen.width / 2 - 100,
             },
         ];
         currentWindow = $arrayOfWindows.at(-1);

@@ -3,7 +3,7 @@
     import { scale } from "svelte/transition";
     const dispatch = createEventDispatcher();
 
-    type TypeAction = "close" | "launch" | "focus" | "max"
+    type TypeAction = "close" | "launch" | "focus" | "max";
 
     export let id: string;
     export let title: string;
@@ -13,9 +13,9 @@
 
     export let left = screen.width / 2 - 100;
     export let top = screen.height / 2 - 100;
-    export let width: number = 300
-    export let height: number = 400
-    export let closed: boolean = false
+    export let width: number = 300;
+    export let height: number = 400;
+    export let closed: boolean = false;
 
     let moving = false;
     let maximized = false;
@@ -33,7 +33,7 @@
         right: number;
         top: number;
         bottom: number;
-    }
+    };
 
     function onMouseMove(e: MouseEvent) {
         if (moving) {
@@ -132,107 +132,107 @@
         }
     }
 </script>
-{#if !closed}
-<div
-    class="window-{id} {maximized ? 'max' : ''}"
-    id="window-{id}"
-    style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {zindex}"
-    transition:scale
-    on:mousedown={() => trigger("focus")}
->
-    <div class="title draggable" on:mousedown={onMouseDown}>
-        <p>{id}</p><br>
-        {#if windowIcon}
-            <img src={windowIcon} alt="icon">
-        {/if}
-        <p>{title}</p>
-        <div class="action">
-            <p
-                class="action-button close"
-                on:click={() => trigger("close")}
-                on:keydown={() => trigger("close")}
-            />
-            {#if !closeOnly}
-            <p
-                class="action-button maximize"
-                on:click={onMaximize}
-                on:keydown={onMaximize}
-            />
-            <p class="action-button minimize" />
-            {/if}
-        </div>
-    </div>
-    <div class="content">
-        <slot />
-    </div>
-    <div
-        class="grabber right"
-        on:mouseenter={() => (direction = "right")}
-        on:mouseleave={() => {
-            if (!resizing) direction = null;
-        }}
-        on:mousedown={onResize}
-    />
-    <div
-        class="grabber left"
-        on:mouseenter={() => (direction = "left")}
-        on:mouseleave={() => {
-            if (!resizing) direction = null;
-        }}
-        on:mousedown={onResize}
-    />
-    <div
-        class="grabber top"
-        on:mouseenter={() => (direction = "top")}
-        on:mouseleave={() => {
-            if (!resizing) direction = null;
-        }}
-        on:mousedown={onResize}
-    />
-    <div
-        class="grabber bottom"
-        on:mouseenter={() => (direction = "bottom")}
-        on:mouseleave={() => {
-            if (!resizing) direction = null;
-        }}
-        on:mousedown={onResize}
-    />
-    <div
-        class="grabber top-left"
-        on:mouseenter={() => (direction = "top-left")}
-        on:mouseleave={() => {
-            if (!resizing) direction = null;
-        }}
-        on:mousedown={onResize}
-    />
-    <div
-        class="grabber top-right"
-        on:mouseenter={() => (direction = "top-right")}
-        on:mouseleave={() => {
-            if (!resizing) direction = null;
-        }}
-        on:mousedown={onResize}
-    />
-    <div
-        class="grabber bottom-left"
-        on:mouseenter={() => (direction = "bottom-left")}
-        on:mouseleave={() => {
-            if (!resizing) direction = null;
-        }}
-        on:mousedown={onResize}
-    />
-    <div
-        class="grabber bottom-right"
-        on:mouseenter={() => (direction = "bottom-right")}
-        on:mouseleave={() => {
-            if (!resizing) direction = null;
-        }}
-        on:mousedown={onResize}
-    />
-</div>
 
+{#if !closed}
+    <div
+        class="window-{id} {maximized ? 'max' : ''}"
+        id="window-{id}"
+        style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {zindex}"
+        transition:scale
+        on:mousedown={() => trigger("focus")}
+    >
+        <div class="title draggable" on:mousedown={onMouseDown}>
+            {#if windowIcon}
+                <img src={windowIcon} alt="icon" />
+            {/if}
+            <p>{title}</p>
+            <div class="action">
+                <p
+                    class="action-button close"
+                    on:click={() => trigger("close")}
+                    on:keydown={() => trigger("close")}
+                />
+                {#if !closeOnly}
+                    <p
+                        class="action-button maximize"
+                        on:click={onMaximize}
+                        on:keydown={onMaximize}
+                    />
+                    <p class="action-button minimize" />
+                {/if}
+            </div>
+        </div>
+        <div class="content">
+            <slot />
+        </div>
+        <div
+            class="grabber right"
+            on:mouseenter={() => (direction = "right")}
+            on:mouseleave={() => {
+                if (!resizing) direction = null;
+            }}
+            on:mousedown={onResize}
+        />
+        <div
+            class="grabber left"
+            on:mouseenter={() => (direction = "left")}
+            on:mouseleave={() => {
+                if (!resizing) direction = null;
+            }}
+            on:mousedown={onResize}
+        />
+        <div
+            class="grabber top"
+            on:mouseenter={() => (direction = "top")}
+            on:mouseleave={() => {
+                if (!resizing) direction = null;
+            }}
+            on:mousedown={onResize}
+        />
+        <div
+            class="grabber bottom"
+            on:mouseenter={() => (direction = "bottom")}
+            on:mouseleave={() => {
+                if (!resizing) direction = null;
+            }}
+            on:mousedown={onResize}
+        />
+        <div
+            class="grabber top-left"
+            on:mouseenter={() => (direction = "top-left")}
+            on:mouseleave={() => {
+                if (!resizing) direction = null;
+            }}
+            on:mousedown={onResize}
+        />
+        <div
+            class="grabber top-right"
+            on:mouseenter={() => (direction = "top-right")}
+            on:mouseleave={() => {
+                if (!resizing) direction = null;
+            }}
+            on:mousedown={onResize}
+        />
+        <div
+            class="grabber bottom-left"
+            on:mouseenter={() => (direction = "bottom-left")}
+            on:mouseleave={() => {
+                if (!resizing) direction = null;
+            }}
+            on:mousedown={onResize}
+        />
+        <div
+            class="grabber bottom-right"
+            on:mouseenter={() => (direction = "bottom-right")}
+            on:mouseleave={() => {
+                if (!resizing) direction = null;
+            }}
+            on:mousedown={onResize}
+        />
+    </div>
 {/if}
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />
+
 <style lang="scss">
     [class^="window"] {
         user-select: none;
@@ -240,14 +240,12 @@
         flex-direction: column;
         font-family: "Inter", sans-serif;
         border-radius: 15px;
-        box-shadow:
-            0px 6.4px 13.8px rgba(0, 0, 0, 0.02),
+        box-shadow: 0px 6.4px 13.8px rgba(0, 0, 0, 0.02),
             0px 12.9px 24.1px rgba(0, 0, 0, 0.028),
             0px 20px 31.6px rgba(0, 0, 0, 0.035),
             0px 29.5px 38px rgba(0, 0, 0, 0.042),
             0px 46.4px 46.9px rgba(0, 0, 0, 0.05),
-            0px 100px 80px rgba(0, 0, 0, 0.07)
-        ;
+            0px 100px 80px rgba(0, 0, 0, 0.07);
 
         &:not(.content) {
             overflow: hidden;
@@ -308,7 +306,7 @@
         }
     }
 
-    @media(max-width: 1366px) {
+    @media (max-width: 1366px) {
         .title {
             padding: 5px;
         }
