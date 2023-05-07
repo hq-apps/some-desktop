@@ -19,7 +19,8 @@
         left: number,
         top: number,
         width: number,
-        height: number
+        height: number,
+        closed?: boolean
     }
 
     interface WindowOption {
@@ -43,7 +44,12 @@
             case "close":
                 console.log(event.detail.id);
                 console.log($arrayOfWindows);
-                const filtered = $arrayOfWindows.filter(m => m.id != event.detail.id)
+                const filtered = $arrayOfWindows.map(m => {
+                    if(m.id == event.detail.id) {
+                        m.closed = true
+                    }
+                    return m
+                })
                 arrayOfWindows.set(filtered)
                 // if (arrayOfWindows. === 1) { //hellish code dont use
                 //     arrayOfWindows = [];
@@ -127,6 +133,7 @@
         windowIcon={w.windowIcon || null}
         zindex={w.zindex}
         closeOnly={w.closeOnly}
+        closed={w.closed || false}
     >
         <svelte:component this={w.com} prop={{}} />
     </Window>

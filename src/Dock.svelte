@@ -8,6 +8,7 @@
         dockIcon: string;
         com: typeof SvelteComponent;
         zindex: number;
+        closed: boolean
     }
 
     export let windows: Array<WindowProperties>;
@@ -24,9 +25,12 @@
 
 <div class="dock">
     {#each windows as w}
+    {#if !w.closed}
         <div class="dock-icon" on:click={() => handleFocus(w.id)} on:keydown={() => handleFocus(w.id)}>
             <img src={w.dockIcon} alt="dock" />
         </div>
+    {/if}
+        
     {/each}
 </div>
 

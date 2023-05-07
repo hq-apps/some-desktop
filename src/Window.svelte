@@ -15,6 +15,7 @@
     export let top = screen.height / 2 - 100;
     export let width: number = 300
     export let height: number = 400
+    export let closed: boolean = false
 
     let moving = false;
     let maximized = false;
@@ -131,7 +132,7 @@
         }
     }
 </script>
-
+{#if !closed}
 <div
     class="window-{id} {maximized ? 'max' : ''}"
     id="window-{id}"
@@ -230,8 +231,8 @@
     />
 </div>
 
+{/if}
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />
-
 <style lang="scss">
     [class^="window"] {
         user-select: none;
