@@ -47,6 +47,7 @@
             }
             if (direction.match("left")) {
                 delta = initialPos.x - e.pageX;
+                width = initialRect.width + delta;
                 left = initialRect.left - delta;
             }
             if (direction.match("right")) {
