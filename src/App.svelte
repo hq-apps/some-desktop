@@ -4,13 +4,20 @@
     import Welcome from "./contents/Welcome.svelte";
 
     let arrayOfWindows: Array<{ id: string; com: typeof SvelteComponent }> = [];
-    const id = Date.now().toString();
-    arrayOfWindows.push({ id, com: Welcome });
 
     function onUpdate(event?: { detail: { id: string } }) {
         if (!event) return;
         arrayOfWindows = arrayOfWindows.filter((m) => m.id != event.detail.id);
     }
+
+    function newWindow(component?: typeof SvelteComponent) {
+        const id = Date.now().toString();
+        arrayOfWindows = [...arrayOfWindows, { id, com: component || Welcome }];
+    }
+
+    setTimeout(() => {
+        newWindow();
+    }, 2000);
 </script>
 
 {#each arrayOfWindows as w}

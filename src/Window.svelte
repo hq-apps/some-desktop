@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
-
+    import { scale } from "svelte/transition";
     const dispatch = createEventDispatcher();
 
     export let id: string;
@@ -11,6 +11,8 @@
     let height: number = 300;
 
     let moving = false;
+    let maximized = false;
+    let lastBeforeMaximized = { l: left, t: top, w: width, h: height };
 
     function onMouseDown() {
         moving = true;
@@ -93,12 +95,41 @@
             bottom: rect.bottom,
         };
     }
+
+    function onMaximize() {
+        if (!maximized) {
+            lastBeforeMaximized = {
+                l: left,
+                t: top,
+                w: width,
+                h: height,
+            };
+            maximized = true;
+            top = 0;
+            left = 0;
+            width = Math.max(
+                document.body.scrollWidth,
+                document.body.offsetWidth
+            );
+            height = Math.max(
+                document.body.scrollHeight,
+                document.body.offsetHeight
+            );
+        } else {
+            maximized = false;
+            top = lastBeforeMaximized.t;
+            left = lastBeforeMaximized.l;
+            width = lastBeforeMaximized.w;
+            height = lastBeforeMaximized.h;
+        }
+    }
 </script>
 
 <div
-    class="window-{id}"
+    class="window-{id} {maximized ? 'max' : ''}"
     id="window-{id}"
     style="left: {left}px; top: {top}px; width: {width}px; height: {height}px;"
+    transition:scale
 >
     <div class="title draggable" on:mousedown={onMouseDown}>
         <p>EPIK</p>
@@ -108,7 +139,11 @@
                 on:click={onClose}
                 on:keydown={onClose}
             />
-            <p class="action-button maximize" />
+            <p
+                class="action-button maximize"
+                on:click={onMaximize}
+                on:keydown={onMaximize}
+            />
             <p class="action-button minimize" />
         </div>
     </div>
@@ -331,5 +366,9 @@
 
     :global(.grabber.selected) {
         border: solid 1px black;
+    }
+
+    .max {
+        border-radius: 0;
     }
 </style>
