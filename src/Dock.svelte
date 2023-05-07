@@ -1,6 +1,6 @@
 <script lang="ts">
     import { SvelteComponent, createEventDispatcher } from "svelte";
-    
+
     interface WindowProperties {
         id: string;
         title: string;
@@ -8,29 +8,32 @@
         dockIcon: string;
         com: typeof SvelteComponent;
         zindex: number;
-        closed: boolean
+        closed?: boolean;
     }
 
     export let windows: Array<WindowProperties>;
 
     const dispatch = createEventDispatcher();
-    
+
     function handleFocus(id: string) {
         dispatch("message", {
             id,
-            type: "focus"
-        })
+            type: "focus",
+        });
     }
 </script>
 
 <div class="dock">
     {#each windows as w}
-    {#if !w.closed}
-        <div class="dock-icon" on:click={() => handleFocus(w.id)} on:keydown={() => handleFocus(w.id)}>
-            <img src={w.dockIcon} alt="dock" />
-        </div>
-    {/if}
-        
+        {#if !w.closed}
+            <div
+                class="dock-icon"
+                on:click={() => handleFocus(w.id)}
+                on:keydown={() => handleFocus(w.id)}
+            >
+                <img src={w.dockIcon} alt="dock" />
+            </div>
+        {/if}
     {/each}
 </div>
 
@@ -40,7 +43,7 @@
             scale: 0;
         }
         to {
-           scale: 1;
+            scale: 1;
         }
     }
 
@@ -87,7 +90,7 @@
         z-index: 100000;
     }
 
-    @media(max-width: 1366px) {
+    @media (max-width: 1366px) {
         .dock {
             --icon-size: 64px;
             --border-radius: 30px;
