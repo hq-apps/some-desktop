@@ -29,10 +29,10 @@
         dockIcon: string;
         closeOnly?: boolean;
         com?: typeof SvelteComponent;
-        left?: number,
-        top?: number,
-        width?: number,
-        height?: number,
+        left?: number;
+        top?: number;
+        width?: number;
+        height?: number;
     }
     // I STILL DON'T UNDERSTAND
     let arrayOfWindows: Writable<Array<WindowProperties>> = writable([]);
