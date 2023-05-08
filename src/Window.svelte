@@ -11,10 +11,10 @@
     export let zindex: number = 0;
     export let closeOnly: boolean;
 
-    export let left = screen.width / 2 - 100;
-    export let top = screen.height / 2 - 100;
-    export let width: number = 300;
-    export let height: number = 400;
+    export let left;
+    export let top;
+    export let width: number;
+    export let height: number;
     export let closed: boolean = false;
 
     let moving = false;

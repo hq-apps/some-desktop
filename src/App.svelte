@@ -29,6 +29,10 @@
         dockIcon: string;
         closeOnly?: boolean;
         com?: typeof SvelteComponent;
+        left?: number,
+        top?: number,
+        width?: number,
+        height?: number,
     }
     // I STILL DON'T UNDERSTAND
     let arrayOfWindows: Writable<Array<WindowProperties>> = writable([]);
@@ -90,10 +94,10 @@
                 title: opt?.title || "Sample Title",
                 windowIcon: opt?.windowIcon || "/notz.png",
                 closeOnly: !opt.closeOnly ? false : opt.closeOnly,
-                width: 400,
-                height: 600,
-                top: screen.width / 2 - 100,
-                left: screen.width / 2 - 100,
+                width: opt?.width || 500,
+                height: opt?.height || 500,
+                top: opt?.top || screen.height / 2 - (opt?.height || 500)/2,
+                left: opt?.left || screen.width / 2 - (opt?.width || 500)/2
             },
         ];
         currentWindow = $arrayOfWindows.at(-1);
@@ -105,6 +109,8 @@
             title: "About MEC OS XXX",
             dockIcon: "//hqapps.org/icens/96.png",
             closeOnly: true,
+            width: 600,
+            height: 400,
         });
     }
 
@@ -134,6 +140,10 @@
         zindex={w.zindex}
         closeOnly={w.closeOnly}
         closed={w.closed || false}
+        width={w.width}
+        height={w.height}
+        top={w.top}
+        left={w.left}
     >
         <svelte:component this={w.com} prop={{}} />
     </Window>
