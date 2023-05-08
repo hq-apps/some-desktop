@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
     import { scale } from "svelte/transition";
     const dispatch = createEventDispatcher();
 
@@ -11,12 +11,17 @@
     export let zindex: number = 0;
     export let closeOnly: boolean;
 
-    export let left;
-    export let top;
-    export let width: number;
-    export let height: number;
-    export let closed: boolean = false;
+    export let initLeft: number;
+    export let initTop: number;
+    export let initWidth: number;
+    export let initHeight: number;
 
+    let left = initLeft;
+    let top = initTop;
+    let width = initWidth;
+    let height = initHeight;
+
+    let closed: boolean = false;
     let moving = false;
     let maximized = false;
     let lastBeforeMaximized = { l: left, t: top, w: width, h: height };
@@ -30,9 +35,12 @@
         width: number;
         height: number;
         left: number;
-        right: number;
         top: number;
-        bottom: number;
+    } = {
+        width,
+        height,
+        left,
+        top,
     };
 
     function onMouseMove(e: MouseEvent) {
@@ -72,6 +80,9 @@
     }
 
     function trigger(type: TypeAction, value?: any) {
+        if (type == "close") {
+            closed = true;
+        }
         dispatch("message", { id, type, value });
     }
 
@@ -91,16 +102,11 @@
         if (direction == null) return;
         resizing = true;
         initialPos = { x: event.pageX, y: event.pageY };
-        const rect = document
-            .getElementById(`window-${id}`)
-            .getBoundingClientRect();
         initialRect = {
-            width: rect.width,
-            height: rect.height,
-            left: rect.left,
-            right: rect.right,
-            top: rect.top,
-            bottom: rect.bottom,
+            width,
+            height,
+            left,
+            top,
         };
     }
 
@@ -112,6 +118,7 @@
                 w: width,
                 h: height,
             };
+
             maximized = true;
             top = 0;
             left = 0;
@@ -133,6 +140,12 @@
     }
 </script>
 
+<p>
+    {id}
+    top: {top}; left: {left}; width: {width}; height: {height}; x: {initialPos?.x};
+    y: {initialPos?.y};
+</p>
+<p>resizing: {resizing}; direction: {direction}; moving: {moving};</p>
 {#if !closed}
     <div
         class="window-{id} {maximized ? 'max' : ''}"

@@ -55,6 +55,9 @@
                     return m;
                 });
                 arrayOfWindows.set(filtered);
+                if ($arrayOfWindows.every((e) => e.closed)) {
+                    arrayOfWindows.set([]);
+                }
                 // if (arrayOfWindows. === 1) { //hellish code dont use
                 //     arrayOfWindows = [];
                 // } else {
@@ -93,11 +96,11 @@
                 dockIcon: opt?.dockIcon || "/notz.png",
                 title: opt?.title || "Sample Title",
                 windowIcon: opt?.windowIcon || "/notz.png",
-                closeOnly: !opt.closeOnly ? false : opt.closeOnly,
+                closeOnly: !opt?.closeOnly ? false : opt.closeOnly,
                 width: opt?.width || 500,
                 height: opt?.height || 500,
-                top: opt?.top || screen.height / 2 - (opt?.height || 500)/2,
-                left: opt?.left || screen.width / 2 - (opt?.width || 500)/2
+                top: opt?.top || screen.height / 2 - (opt?.height || 500) / 2,
+                left: opt?.left || screen.width / 2 - (opt?.width || 500) / 2,
             },
         ];
         currentWindow = $arrayOfWindows.at(-1);
@@ -116,13 +119,13 @@
 
     setTimeout(() => {
         newWindow();
-        setTimeout(() => {
-            newWindow({
-                dockIcon: "/notz.png",
-                title: "EPIK",
-                com: Welcome2,
-            });
-        }, 300);
+        // setTimeout(() => {
+        //     newWindow({
+        //         dockIcon: "/notz.png",
+        //         title: "EPIK",
+        //         com: Welcome2,
+        //     });
+        // }, 300);
     }, 2000);
 </script>
 
@@ -139,11 +142,10 @@
         windowIcon={w.windowIcon || null}
         zindex={w.zindex}
         closeOnly={w.closeOnly}
-        closed={w.closed || false}
-        width={w.width}
-        height={w.height}
-        top={w.top}
-        left={w.left}
+        initWidth={w.width}
+        initHeight={w.height}
+        initTop={w.top}
+        initLeft={w.left}
     >
         <svelte:component this={w.com} prop={{}} />
     </Window>
