@@ -140,12 +140,12 @@
     }
 </script>
 
-<p>
+<!-- <p>
     {id}
     top: {top}; left: {left}; width: {width}; height: {height}; x: {initialPos?.x};
     y: {initialPos?.y};
 </p>
-<p>resizing: {resizing}; direction: {direction}; moving: {moving};</p>
+<p>resizing: {resizing}; direction: {direction}; moving: {moving};</p> -->
 {#if !closed}
     <div
         class="window-{id} {maximized ? 'max' : ''}"
