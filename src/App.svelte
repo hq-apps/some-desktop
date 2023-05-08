@@ -56,7 +56,9 @@
                 });
                 arrayOfWindows.set(filtered);
                 if ($arrayOfWindows.every((e) => e.closed)) {
-                    arrayOfWindows.set([]);
+                    setTimeout(() => {
+                        arrayOfWindows.set([]);
+                    }, 300);
                 }
                 // if (arrayOfWindows. === 1) { //hellish code dont use
                 //     arrayOfWindows = [];
@@ -151,4 +153,8 @@
     </Window>
 {/each}
 
-<Dock windows={$arrayOfWindows} on:message={onUpdate} />
+<Dock
+    windows={$arrayOfWindows}
+    focusedW={currentWindow}
+    on:message={onUpdate}
+/>

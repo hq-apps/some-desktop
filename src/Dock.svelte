@@ -8,10 +8,17 @@
         dockIcon: string;
         com: typeof SvelteComponent;
         zindex: number;
+        closeOnly: boolean;
+        left: number;
+        top: number;
+        width: number;
+        height: number;
         closed?: boolean;
     }
 
     export let windows: Array<WindowProperties>;
+
+    export let focusedW: WindowProperties;
 
     const dispatch = createEventDispatcher();
 
@@ -32,6 +39,9 @@
                 on:keydown={() => handleFocus(w.id)}
             >
                 <img src={w.dockIcon} alt="dock" />
+                {#if focusedW.id == w.id}
+                    <div class="focused">sex</div>
+                {/if}
             </div>
         {/if}
     {/each}
@@ -88,6 +98,13 @@
         transform: translateX(-50%);
         backdrop-filter: blur(12px);
         z-index: 100000;
+    }
+
+    .focused {
+        position: absolute;
+        height: 30px;
+        width: 10px;
+        color: red;
     }
 
     @media (max-width: 1366px) {

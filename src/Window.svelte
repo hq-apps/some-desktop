@@ -120,7 +120,7 @@
             };
 
             maximized = true;
-            top = 0;
+            top = 20;
             left = 0;
             width = Math.max(
                 document.body.scrollWidth,
