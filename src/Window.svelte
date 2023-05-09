@@ -10,6 +10,7 @@
     export let windowIcon: string;
     export let zindex: number = 0;
     export let closeOnly: boolean;
+    export let scrollbar: boolean;
 
     export let initLeft: number;
     export let initTop: number;
@@ -175,7 +176,7 @@
                 {/if}
             </div>
         </div>
-        <div class="content">
+        <div class="content" style={scrollbar ? "overflow: scroll;" : ""}>
             <slot />
         </div>
         <div
@@ -262,10 +263,6 @@
 
         &:not(.content) {
             overflow: hidden;
-        }
-
-        .content {
-            overflow: scroll;
         }
     }
     .title {

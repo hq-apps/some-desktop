@@ -20,6 +20,7 @@
         top: number;
         width: number;
         height: number;
+        scrollBar: boolean;
         closed?: boolean;
     }
 
@@ -33,6 +34,7 @@
         top?: number;
         width?: number;
         height?: number;
+        scrollBar?: boolean;
     }
     // I STILL DON'T UNDERSTAND
     let arrayOfWindows: Writable<Array<WindowProperties>> = writable([]);
@@ -103,6 +105,7 @@
                 height: opt?.height || 500,
                 top: opt?.top || screen.height / 2 - (opt?.height || 500) / 2,
                 left: opt?.left || screen.width / 2 - (opt?.width || 500) / 2,
+                scrollBar: opt?.scrollBar == undefined ? true : opt?.scrollBar,
             },
         ];
         currentWindow = $arrayOfWindows.at(-1);
@@ -148,6 +151,7 @@
         initHeight={w.height}
         initTop={w.top}
         initLeft={w.left}
+        scrollbar={w.scrollBar}
     >
         <svelte:component this={w.com} prop={{}} />
     </Window>
