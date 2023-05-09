@@ -3,10 +3,11 @@
     import Window from "./Window.svelte";
     import Welcome from "./contents/Welcome.svelte";
     import Dock from "./Dock.svelte";
-    import Welcome2 from "./contents/Welcome2.svelte";
+    // import Welcome2 from "./contents/Saffari.svelte";
     import Panel from "./Panel.svelte";
     import About from "./contents/About.svelte";
     import { writable, type Writable } from "svelte/store";
+    import ContextMenu from "./ContextMenu.svelte";
 
     interface WindowProperties {
         id: string;
@@ -138,7 +139,7 @@
     title={!currentWindow?.title ? "Desktop" : currentWindow.title}
     on:about={showAbout}
 />
-
+<ContextMenu />
 {#each $arrayOfWindows as w}
     <Window
         id={w.id}

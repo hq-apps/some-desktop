@@ -176,7 +176,10 @@
                 {/if}
             </div>
         </div>
-        <div class="content" style={scrollbar ? "overflow: scroll;" : ""}>
+        <div
+            class="content"
+            style={scrollbar ? "overflow: scroll;" : "overflow: hidden;"}
+        >
             <slot />
         </div>
         <div
