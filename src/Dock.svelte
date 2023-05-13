@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { SvelteComponent, createEventDispatcher } from "svelte";
+    import { SvelteComponent } from "svelte";
+    import { focusWindow } from "./lib/Window";
 
     interface WindowProperties {
         id: string;
@@ -19,15 +20,6 @@
     export let windows: Array<WindowProperties>;
 
     export let focusedW: WindowProperties;
-
-    const dispatch = createEventDispatcher();
-
-    function handleFocus(id: string) {
-        dispatch("message", {
-            id,
-            type: "focus",
-        });
-    }
 </script>
 
 <div class="dock">
@@ -35,8 +27,8 @@
         {#if !w.closed}
             <div
                 class="dock-icon"
-                on:click={() => handleFocus(w.id)}
-                on:keydown={() => handleFocus(w.id)}
+                on:click={() => focusWindow(w.id)}
+                on:keydown={() => focusWindow(w.id)}
             >
                 <img src={w.dockIcon} alt="dock" />
                 {#if focusedW.id == w.id}

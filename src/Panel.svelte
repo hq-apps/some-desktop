@@ -1,7 +1,8 @@
 <script lang="ts">
     import { DateTime } from "luxon";
-    import { createEventDispatcher } from "svelte";
-    const dispatch = createEventDispatcher();
+    import { newWindow } from "./lib/Window";
+    import About from "./contents/About.svelte";
+
     export let title: string;
 
     // Sun May 05 11:38 PM
@@ -13,7 +14,14 @@
     }, 2000);
 
     function showAbout() {
-        dispatch("about");
+        newWindow({
+            com: About,
+            title: "About MEC OS XXX",
+            dockIcon: "//hqapps.org/icens/96.png",
+            closeOnly: true,
+            width: 600,
+            height: 400,
+        });
     }
 </script>
 

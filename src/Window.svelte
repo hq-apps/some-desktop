@@ -1,9 +1,6 @@
 <script lang="ts">
-    import { createEventDispatcher, onMount } from "svelte";
     import { scale } from "svelte/transition";
-    const dispatch = createEventDispatcher();
-
-    type TypeAction = "close" | "launch" | "focus" | "max";
+    import { closeWindow, focusWindow } from "./lib/Window";
 
     export let id: string;
     export let title: string;
@@ -80,13 +77,6 @@
         }
     }
 
-    function trigger(type: TypeAction, value?: any) {
-        if (type == "close") {
-            closed = true;
-        }
-        dispatch("message", { id, type, value });
-    }
-
     let resizing = false;
     let direction:
         | "top"
@@ -153,7 +143,7 @@
         id="window-{id}"
         style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {zindex}"
         transition:scale
-        on:mousedown={() => trigger("focus")}
+        on:mousedown={() => focusWindow(id)}
     >
         <div class="title draggable" on:mousedown={onMouseDown}>
             {#if windowIcon}
@@ -163,8 +153,8 @@
             <div class="action">
                 <p
                     class="action-button close"
-                    on:click={() => trigger("close")}
-                    on:keydown={() => trigger("close")}
+                    on:click={() => closeWindow(id)}
+                    on:keydown={() => closeWindow(id)}
                 />
                 {#if !closeOnly}
                     <p
