@@ -20,6 +20,7 @@
     function removeNote(i: number) {
         notes.splice(i, 1);
         notes = notes; // totally the best way of triggering reactivity
+        write("notz", "notes", JSON.stringify(notes));
     }
 </script>
 
