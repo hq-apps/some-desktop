@@ -1,5 +1,4 @@
 import type { SvelteComponent } from "svelte";
-import { writable, type Writable, get } from "svelte/store";
 import Welcome from "../contents/Welcome.svelte";
 import { store, type Store } from "./store";
 
@@ -67,17 +66,22 @@ export function newWindow(opt?: WindowOption) {
 
 export function closeWindow(id: string) {
     arrayOfWindows.update(u => {
-        u.map((m) => {
-            if (m.id == id) {
-                m.closed = true;
+        for (let i = 0; i < u.length; i++) {
+            const e = u[i];
+            if (e.id == id) {
+                u[i].closed = true
             }
-            return m
-        })
-        if (u.every(m => m.closed)) {
-            u = []
         }
         return u
     })
+    setTimeout(() => {
+        arrayOfWindows.update(u => {
+            if (u.every(e => e.closed)) {
+                u = []
+            }
+            return u
+        })
+    }, 300)
 }
 
 export function focusWindow(id: string) {

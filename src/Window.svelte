@@ -19,7 +19,7 @@
     let width = initWidth;
     let height = initHeight;
 
-    let closed: boolean = false;
+    export let closed: boolean = false;
     let moving = false;
     let maximized = false;
     let lastBeforeMaximized = { l: left, t: top, w: width, h: height };

@@ -12,6 +12,10 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
 -->
 
 <script lang="ts">
+    import Saffari from "./apps/Saffari.svelte";
+    import Notz from "./apps/Notz.svelte";
+    import { newWindow } from "./lib/Window";
+
     // pos is cursor position when right click occur
     let pos = { x: 0, y: 0 };
     // menu is dimension (height and width) of context menu
@@ -59,39 +63,37 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
             w: width,
         };
     }
-    function addItem() {}
-    function print() {}
+    function launchSaffari() {
+        newWindow({
+            title: "Saffari",
+            com: Saffari,
+            dockIcon: "/notz.png",
+            width: 1060,
+            height: 600,
+        });
+    }
+    async function launchNotz() {
+        newWindow({
+            title: "Notz",
+            com: Notz,
+            dockIcon: "/notz.png",
+            width: 300,
+            height: 600,
+        });
+    }
     function zoom() {}
     function remove() {}
     function setting() {}
     let menuItems = [
         {
             name: "addItem",
-            onClick: addItem,
-            displayText: "SEX",
+            onClick: launchSaffari,
+            displayText: "Saffari",
         },
         {
-            name: "emptyicons",
-            onClick: addItem,
-            displayText: "SEXn",
-        },
-        {
-            name: "zoom",
-            onClick: zoom,
-            displayText: "EWFGRTHYJU",
-        },
-        {
-            name: "printMenu",
-            onClick: print,
-            displayText: "SEEEEEEEEX",
-        },
-        {
-            name: "hr",
-        },
-        {
-            name: "settings",
-            onClick: setting,
-            displayText: "[POR]",
+            name: "addItem",
+            onClick: launchNotz,
+            displayText: "Notz",
         },
         {
             name: "hr",

@@ -31,6 +31,7 @@
         initTop={w.top}
         initLeft={w.left}
         scrollbar={w.scrollBar}
+        closed={w.closed}
     >
         <svelte:component this={w.com} prop={{}} />
     </Window>
