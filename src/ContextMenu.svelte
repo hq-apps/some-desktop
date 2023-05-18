@@ -77,7 +77,7 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
             title: "Notz",
             com: Notz,
             dockIcon: "/notz.png",
-            width: 300,
+            width: 320,
             height: 600,
         });
     }

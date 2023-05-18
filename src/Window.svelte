@@ -317,7 +317,7 @@
 
     .content {
         margin: 0;
-        background-color: rgb(245, 228, 228);
+        background-color: rgb(250, 238, 238);
         height: 100%;
     }
 

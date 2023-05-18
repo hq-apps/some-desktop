@@ -1,6 +1,8 @@
 <script lang="ts">
+    import TextInput from "../ui/TextInput.svelte";
     import { write, read } from "../lib/PersistantStorage";
     import { onMount } from "svelte";
+    import SubmitButton from "../ui/SubmitButton.svelte";
 
     let notes = [];
     let noteText = "";
@@ -34,13 +36,17 @@
     </ul>
 
     <form on:submit|preventDefault={addNote}>
-        <input type="text" bind:value={noteText} />
-        <input type="submit" value="Add Note" />
+        <TextInput bind:value={noteText} />
+        <SubmitButton value="Add Note" />
     </form>
 </div>
 
 <style>
     li:hover {
         text-decoration: line-through;
+    }
+
+    form {
+        margin: 8px;
     }
 </style>
