@@ -27,6 +27,10 @@
     function onMouseDown() {
         moving = true;
     }
+    
+    function onMouseDownShift(e: MouseEvent) {
+        if(e.shiftKey) moving = true;
+    }
 
     let initialPos: { x: number; y: number };
     let initialRect: {
@@ -143,7 +147,7 @@
         id="window-{id}"
         style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {zindex}"
         transition:scale
-        on:mousedown={() => focusWindow(id)}
+        on:mousedown={(e) => {focusWindow(id); onMouseDownShift(e)}}
     >
         <div class="title draggable" on:mousedown={onMouseDown}>
             {#if windowIcon}
