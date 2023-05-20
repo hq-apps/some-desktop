@@ -15,6 +15,7 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
     import Saffari from "./apps/Saffari.svelte";
     import Notz from "./apps/Notz.svelte";
     import { newWindow } from "./lib/Window";
+    import Settings from "./apps/Settings.svelte";
 
     // pos is cursor position when right click occur
     let pos = { x: 0, y: 0 };
@@ -83,7 +84,15 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
     }
     function zoom() {}
     function remove() {}
-    function setting() {}
+    function setting() {
+        newWindow({
+            title: "setingz",
+            com: Settings,
+            dockIcon: "/notz.png",
+            width: 200,
+            height: 300,
+        });
+    }
     let menuItems = [
         {
             name: "addItem",
@@ -100,7 +109,7 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
         },
         {
             name: "trash",
-            onClick: remove,
+            onClick: setting,
             displayText: "AAAAAAAAA",
         },
     ];
