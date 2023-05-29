@@ -16,6 +16,7 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
     import Notz from "./apps/Notz.svelte";
     import { newWindow } from "./lib/Window";
     import Settings from "./apps/Settings.svelte";
+    import { launcherVisible } from "./lib/Launcher";
 
     // pos is cursor position when right click occur
     let pos = { x: 0, y: 0 };
@@ -82,6 +83,9 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
             height: 600,
         });
     }
+    async function launcher() {
+        launcherVisible.set(true)
+    }
     function zoom() {}
     function remove() {}
     function setting() {
@@ -111,6 +115,11 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
             name: "trash",
             onClick: setting,
             displayText: "AAAAAAAAA",
+        },
+        {
+            name: "AppsLauncher",
+            onClick: launcher,
+            displayText: "AppsLauncher",
         },
     ];
 </script>

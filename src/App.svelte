@@ -1,9 +1,11 @@
 <script lang="ts">
+	import Launcher from './Launcher.svelte';
     import Window from "./Window.svelte";
     import Dock from "./Dock.svelte";
     import Panel from "./Panel.svelte";
     import ContextMenu from "./ContextMenu.svelte";
     import { arrayOfWindows, currentWindow, newWindow } from "./lib/Window";
+    import { launcherVisible } from './lib/Launcher';
 
     setTimeout(() => {
         newWindow();
@@ -38,3 +40,5 @@
 {/each}
 
 <Dock windows={$arrayOfWindows} focusedW={$currentWindow} />
+
+<Launcher bind:visible={$launcherVisible}/>
