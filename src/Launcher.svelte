@@ -1,11 +1,17 @@
 <script>
     import { fade } from "svelte/transition";
-    import { apps } from "./apps.json"
+    import { appArray } from "./lib/Apps"
+    import { showContextMenu } from "./lib/ContextMenu";
+    import { pinApp } from "./lib/Apps";
 
     export let visible = false;
 
     function hide() {
         visible = false;
+    }
+
+    function failLoad() {
+        alert("error loading app")
     }
 </script>
 
@@ -14,8 +20,8 @@
         <div id="launcher">
             <h1>App laucnher</h1>
             <ul class="apps">
-            {#each apps as app}
-                <li class="app">
+            {#each $appArray as app, i}
+                <li class="app" on:click={app.run || failLoad} on:keyup={app.run} on:contextmenu|preventDefault|stopPropagation={e => showContextMenu(e, [{name: "item", onClick: () => pinApp(i), displayText: "Pin"}])}>
                     <img src={app.logo} alt="">
                     <p>{ app.name }</p>
                 </li>
@@ -34,7 +40,7 @@
         height: 100vh;
         background: url("/wallpaper.jpg");
         background-size: cover;
-        z-index: 10000000000;
+        z-index: 99999;
     }
 
     #launcher {
