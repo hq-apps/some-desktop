@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" xmlns:ns1="http://sozi.baierouge.fr" id="svg2" sodipodi:docname="New document 1" viewBox="0 0 100 100" version="1.1" inkscape:version="0.48.0 r9654">
+  <defs id="defs4">
+    <linearGradient id="linearGradient4841" y2="695.1" gradientUnits="userSpaceOnUse" x2="194.49" gradientTransform="matrix(1.1596 0 0 1.1596 -175.86 236.06)" y1="625.3" x1="194.49" inkscape:collect="always">
+      <stop id="stop5733-8-1" style="stop-color:#151515" offset="0"/>
+      <stop id="stop5735-3-0" style="stop-color:#151515" offset=".60526"/>
+      <stop id="stop5731-9-2" style="stop-color:#525252" offset=".81579"/>
+      <stop id="stop5668-3-6" style="stop-color:#919192" offset="1"/>
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview id="base" bordercolor="#666666" inkscape:pageshadow="2" inkscape:window-y="-4" pagecolor="#ffffff" inkscape:window-height="968" inkscape:window-maximized="1" inkscape:zoom="2.8" inkscape:window-x="-4" showgrid="false" borderopacity="1.0" inkscape:current-layer="layer1" inkscape:cx="56.235605" inkscape:cy="95.632752" inkscape:window-width="1280" inkscape:pageopacity="0.0" inkscape:document-units="px"/>
+  <g id="layer1" inkscape:label="Layer 1" inkscape:groupmode="layer" transform="translate(0 -952.36)">
+    <path id="path5662" style="color:#000000;fill:url(#linearGradient4841)" inkscape:connector-curvature="0" d="m90.147 1001.6c0 22.35-18.118 40.469-40.469 40.469-22.35 0-40.469-18.118-40.469-40.469 0-22.35 18.118-40.469 40.469-40.469 22.35 0 40.469 18.118 40.469 40.469z"/>
+    <path id="path5662-4" style="color:#000000;fill:#070707" sodipodi:nodetypes="cssccc" inkscape:connector-curvature="0" d="m88.727 1001.6c0-21.566-17.483-39.049-39.049-39.049s-39.049 17.483-39.049 39.049c0 3.7327 0.52369 7.3431 1.5017 10.762 29.901 11.519 52.103 11.29 75.111-0.061 0.9669-3.4006 1.4844-6.9903 1.4844-10.701z"/>
+    <path id="rect5742" style="color:#000000;fill:#ccced1" inkscape:connector-curvature="0" d="m41.863 986.73c-3.4088 0-6.1605 2.7517-6.1605 6.1605v16.09c0 3.4089 2.7517 6.1606 6.1605 6.1606h16.09c3.4088 0 6.1605-2.7517 6.1605-6.1606v-16.09c0-3.4088-2.7517-6.1605-6.1605-6.1605h-16.09zm0.54364 2.3555h15.003c2.4037 0 4.3486 1.945 4.3486 4.3486v15.003c0 2.4036-1.9449 4.3124-4.3486 4.3124h-15.003c-2.4037 0-4.3124-1.9088-4.3124-4.3124v-15.003c0-2.4036 1.9088-4.3486 4.3124-4.3486z"/>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>iPhone Home Button</dc:title>
+        <dc:date>2010-10-01T11:23:15</dc:date>
+        <dc:description>iPhone Home Button</dc:description>
+        <dc:source>https://openclipart.org/detail/88015/iphone-home-button-by-jhnri4</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>jhnri4</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>black</rdf:li>
+            <rdf:li>button</rdf:li>
+            <rdf:li>circle</rdf:li>
+            <rdf:li>grey</rdf:li>
+            <rdf:li>home</rdf:li>
+            <rdf:li>ipad</rdf:li>
+            <rdf:li>iphone</rdf:li>
+            <rdf:li>ipod</rdf:li>
+            <rdf:li>rectangle</rdf:li>
+            <rdf:li>screen</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>
