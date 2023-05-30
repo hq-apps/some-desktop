@@ -2,7 +2,7 @@
     import { fade } from "svelte/transition";
     import { appArray } from "./lib/Apps"
     import { showContextMenu } from "./lib/ContextMenu";
-    import { pinApp } from "./lib/Apps";
+    import { pinApp, unpinApp } from "./lib/Apps";
 
     export let visible = false;
 
@@ -13,6 +13,11 @@
     function failLoad() {
         alert("error loading app")
     }
+
+    function togglePin(id) {
+        if(appArray.get()[id].pinned) unpinApp(id)
+        else pinApp(id)
+    }
 </script>
 
 {#if visible}
@@ -21,7 +26,7 @@
             <h1>App laucnher</h1>
             <ul class="apps">
             {#each $appArray as app, i}
-                <li class="app" on:click={app.run || failLoad} on:keyup={app.run} on:contextmenu|preventDefault|stopPropagation={e => showContextMenu(e, [{name: "item", onClick: () => pinApp(i), displayText: "Pin"}])}>
+                <li class="app" on:click={app.run || failLoad} on:keyup={app.run} on:contextmenu|preventDefault|stopPropagation={e => showContextMenu(e, [{name: "item", onClick: () => togglePin(i), displayText: app.pinned ? "Unpin" : "Pin"}])}>
                     <img src={app.logo} alt="">
                     <p>{ app.name }</p>
                 </li>
@@ -60,6 +65,7 @@
         height: 90%;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(auto-fill, 160px);
         gap: 8px;
 
         .app {

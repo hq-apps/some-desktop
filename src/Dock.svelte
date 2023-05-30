@@ -1,6 +1,8 @@
 <script lang="ts">
     import { SvelteComponent } from "svelte";
     import { focusWindow } from "./lib/Window";
+    import { appArray } from "./lib/Apps";
+    import { launcherVisible } from "./lib/Launcher";
 
     interface WindowProperties {
         id: string;
@@ -20,9 +22,24 @@
     export let windows: Array<WindowProperties>;
 
     export let focusedW: WindowProperties;
+
+    function showLauncher() {
+        launcherVisible.update(v => !v)
+    }
 </script>
 
 <div class="dock">
+    <div class="dock-icon" on:click={showLauncher} on:keydown={showLauncher} style="background-color: #111;">
+        <img src="/hom.svg" alt="dock" />
+    </div>
+    {#each $appArray as app}
+        {#if app.pinned}
+            <div class="dock-icon" on:click={app.run} on:keydown={app.run}>
+                <img src={app.logo} alt="dock" />
+            </div>
+        {/if}
+    {/each}
+    <hr />
     {#each windows as w}
         {#if !w.closed}
             <div

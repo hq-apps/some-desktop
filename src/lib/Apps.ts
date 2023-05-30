@@ -18,3 +18,12 @@ export function pinApp(id: number) {
 
     console.log(appArray.get())
 }
+
+export function unpinApp(id: number) {
+    appArray.update(e => {
+        e[id].pinned = false
+        return e
+    })
+
+    console.log(appArray.get())
+}
