@@ -21,6 +21,8 @@
             closeOnly: true,
             width: 600,
             height: 400,
+            tag: "about-mec",
+            openOnce: true
         });
     }
 </script>

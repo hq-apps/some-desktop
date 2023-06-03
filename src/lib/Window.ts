@@ -16,6 +16,7 @@ export interface WindowProperties {
     height: number;
     scrollBar: boolean;
     closed?: boolean;
+    tag: string;
 }
 
 export interface WindowOption {
@@ -29,16 +30,25 @@ export interface WindowOption {
     width?: number;
     height?: number;
     scrollBar?: boolean;
+    tag?: string;
+    openOnce?: boolean;
 }
 
 export let arrayOfWindows: Store<Array<WindowProperties>> = store([]);
 export let currentZ: Store<number> = store(10);
 export let currentWindow: Store<WindowProperties | null> = store(null);
 
+function isWindowWithTag(tag: string) {
+    const filtered = arrayOfWindows.get().filter(v => v.tag = tag)
+    return filtered.length != 0
+}
+
 export function newWindow(opt?: WindowOption) {
+    if(opt.openOnce && isWindowWithTag(opt.tag)) return
     const id =
         Date.now().toString() +
         (Math.random() * 1000).toString(4).slice(0, 4);
+
     arrayOfWindows.update(v => {
         let z = currentZ.get()
         z++
@@ -58,6 +68,7 @@ export function newWindow(opt?: WindowOption) {
                 top: opt?.top || screen.height / 2 - (opt?.height || 500) / 2,
                 left: opt?.left || screen.width / 2 - (opt?.width || 500) / 2,
                 scrollBar: opt?.scrollBar == undefined ? true : opt?.scrollBar,
+                tag: opt.tag || null
             },
         ];
     })

@@ -23,6 +23,8 @@ export const apps = [
             dockIcon: "/notz.png",
             width: 320,
             height: 600,
+            tag: "notz-main",
+            openOnce: true
         })
     }
 ]
