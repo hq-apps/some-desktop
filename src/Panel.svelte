@@ -20,7 +20,7 @@
             dockIcon: "//hqapps.org/icens/96.png",
             closeOnly: true,
             width: 600,
-            height: 400,
+            height: 350,
             tag: "about-mec",
             openOnce: true
         });
