@@ -19,7 +19,10 @@
 </script>
 
 <h1>MEC OS XXX Compooper</h1>
+<div class="about">
+    <img src="/mecos.png" alt="mec OS icon">
 <pre>
+    <span>MEC OwOS XXX</span>
     <b>iCwoud PC</b>
     CPU: 42x Intol sPermtium 6,9 Ghz
     RAM: -1 MB
@@ -27,10 +30,17 @@
     Startup Disk: /homework
     Serial Number: {serial}
 </pre>
-<iframe
-    width="853"
-    height="480"
-    src="https://hqapps.tk/"
-    title="Rick Astley - Never Gonna Give You Up (Official Music Video)"
-    frameborder="0"
-/>
+</div>
+
+<style lang="scss">
+    .about {
+        display: flex;
+        flex-direction: row;
+        img {
+            max-width: 30%;
+        }
+        span {
+            font-size: 1.5rem;
+        }
+}
+</style>
