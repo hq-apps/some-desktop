@@ -25,6 +25,7 @@ export const apps = [
             height: 600,
             tag: "notz-main",
             openOnce: true
-        })
+        }),
+        "windowTags": ["notz-main"]
     }
 ]

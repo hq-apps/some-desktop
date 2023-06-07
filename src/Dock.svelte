@@ -1,7 +1,7 @@
 <script lang="ts">
     import { SvelteComponent } from "svelte";
     import { focusWindow } from "./lib/Window";
-    import { appArray } from "./lib/Apps";
+    import { appArray, appHasWindow } from "./lib/Apps";
     import { launcherVisible } from "./lib/Launcher";
 
     interface WindowProperties {
@@ -32,26 +32,30 @@
     <div class="dock-icon" on:click={showLauncher} on:keydown={showLauncher} style="background-color: #111;">
         <img src="/hom.svg" alt="dock" />
     </div>
-    {#each $appArray as app}
+    {#each $appArray as app, i}
         {#if app.pinned}
+        <div class="dock-icon-wrapper">
             <div class="dock-icon" on:click={app.run} on:keydown={app.run}>
                 <img src={app.logo} alt="dock" />
             </div>
+        </div>
         {/if}
     {/each}
     <hr />
     {#each windows as w}
         {#if !w.closed}
+        <div class="dock-icon-wrapper">
             <div
                 class="dock-icon"
                 on:click={() => focusWindow(w.id)}
                 on:keydown={() => focusWindow(w.id)}
             >
                 <img src={w.dockIcon} alt="dock" />
-                {#if focusedW.id == w.id}
-                    <div class="focused">sex</div>
-                {/if}
             </div>
+            {#if focusedW.id == w.id}
+                <div class="ball">sex</div>
+            {/if}
+        </div>
         {/if}
     {/each}
 </div>
@@ -109,11 +113,22 @@
         z-index: 100000;
     }
 
-    .focused {
+    .dock-icon-wrapper {
+        position: relative;
+        padding-bottom: 5px;
+    }
+
+    .ball {
         position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translate(-50%);
         height: 30px;
         width: 10px;
-        color: red;
+        height: 4px;
+        color: transparent;
+        border-radius: 100000px;
+        background-color: rgba($color: #fff, $alpha: 0.5);
     }
 
     @media (max-width: 1366px) {
