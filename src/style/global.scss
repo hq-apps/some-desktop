@@ -2,9 +2,50 @@
     position: absolute;
 }
 
+:root {
+    --color: black;
+    --background-opaque: 255, 255, 255;
+    --background-overlays: rgba(var(--background-opaque), 0.5);
+    --rounding: 8px;
+    --blur-radius: 12px;
+    --font: "Inter", sans-serif;
+    --wallpaper: url("/wallpaper.jpg");
+    --panel-background: var(--background-overlays);
+    --panel-rounding: 0;
+    --panel-padding: 8px;
+    --panel-blur-radius: var(--blur-radius);
+    --panel-color: var(--color);
+    --panel-font: var(--font);
+    --dock-background: var(--background-overlays);
+    --dock-rounding: 40px;
+    --dock-rounding-bottom: 0;
+    --dock-padding: 9px;
+    --dock-icon-size: 96px;
+    --dock-blur-radius: var(--blur-radius);
+    --window-title-background: var(--background-overlays);
+    --window-rounding: 15px;
+    --window-title-padding: 10px;
+    --window-icon-size: 24px;
+    --window-blur-radius: var(--blur-radius);
+    --window-close-color: red;
+    --window-maximize-color: greenyellow;
+    --window-minimize-color: yellow;
+    --window-close-color-hover: rgb(252, 30, 30);
+    --window-maximize-color-hover: rgb(188, 255, 87);
+    --window-minimize-color-hover: rgb(255, 255, 60);
+    --window-content-background: rgb(250, 238, 238);
+    --window-font: var(--font);
+    --launcher-wallpaper: var(--wallpaper);
+    --launcher-background: none;
+    --launcher-icon-rounding: 40%;
+    --launcher-icon-size: 120px;
+    --launcher-blur-radius: 24px;
+    --launcher-font: var(--font);
+}
+
 body {
     height: 100vh;
-    background-image: url("/wallpaper.jpg");
+    background-image: var(--wallpaper);
     background-size: cover;
     margin: 0;
     overflow: hidden;

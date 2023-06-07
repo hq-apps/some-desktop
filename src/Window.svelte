@@ -249,8 +249,8 @@
         user-select: none;
         display: flex;
         flex-direction: column;
-        font-family: "Inter", sans-serif;
-        border-radius: 15px;
+        font-family: var(--window-font);
+        border-radius: var(--window-rounding);
         box-shadow: 0px 6.4px 13.8px rgba(0, 0, 0, 0.02),
             0px 12.9px 24.1px rgba(0, 0, 0, 0.028),
             0px 20px 31.6px rgba(0, 0, 0, 0.035),
@@ -266,14 +266,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 10px;
-        background: rgba($color: #fff, $alpha: 0.5);
-        backdrop-filter: blur(10px);
-        padding: 10px;
+        background: var(--window-title-background);
+        backdrop-filter: blur(var(--window-blur-radius));
+        padding: var(--window-title-padding);
 
         img {
-            width: 24px;
-            height: 24px;
+            width: var(--window-icon-size);
+            height: var(--window-icon-size);
         }
         p {
             margin: 0;
@@ -292,23 +291,23 @@
         }
 
         .close {
-            background-color: red;
+            background-color: var(--window-close-color);
             &:hover {
-                background-color: lighten(red, 20);
+                background-color: var(--window-close-color-hover);
             }
         }
 
         .maximize {
-            background-color: greenyellow;
+            background-color: var(--window-maximize-color);
             &:hover {
-                background-color: lighten(greenyellow, 20);
+                background-color: var(--window-maximize-color-hover);
             }
         }
 
         .minimize {
-            background-color: yellow;
+            background-color: var(--window-minimize-color);
             &:hover {
-                background-color: lighten(yellow, 20);
+                background-color: var(--window-minimize-color-hover);
             }
         }
     }
@@ -321,7 +320,7 @@
 
     .content {
         margin: 0;
-        background-color: rgb(250, 238, 238);
+        background-color: var(--window-content-background);
         height: 100%;
     }
 

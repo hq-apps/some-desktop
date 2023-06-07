@@ -71,16 +71,16 @@
     }
 
     .dock {
-        --icon-size: 96px;
-        --border-radius: 40px;
-        --padding: 9px;
+        --icon-size: var(--dock-icon-size);
+        --border-radius: var(--dock-rounding);
+        --padding: var(--dock-padding);
         display: flex;
         gap: var(--padding);
         padding: var(--padding);
-        background-color: rgba($color: #fff, $alpha: 0.5);
+        background-color: var(--dock-background);
         border-radius: var(--border-radius);
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        border-bottom-left-radius: var(--dock-rounding-bottom);
+        border-bottom-right-radius: var(--dock-rounding-bottom);
 
         .dock-icon {
             width: var(--icon-size);
@@ -109,7 +109,7 @@
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        backdrop-filter: blur(12px);
+        backdrop-filter: blur(var(--dock-blur-radius));
         z-index: 100000;
     }
 

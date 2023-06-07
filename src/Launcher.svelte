@@ -43,20 +43,21 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        background: url("/wallpaper.jpg");
+        background: var(--launcher-wallpaper);
         background-size: cover;
         z-index: 99999;
     }
 
     #launcher {
-        backdrop-filter: blur(24px);
+        backdrop-filter: blur(var(--launcher-blur-radius));
         width: 100%;
         height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        font-family: "Inter", sans-serif;
+        font-family: var(--launcher-font);
+        background: var(--launcher-background);
     }
 
     .apps {
@@ -73,10 +74,10 @@
             flex-direction: column;
             align-items: center;
             img {
-                max-width: 120px;
+                max-width: var(--launcher-icon-size);
                 width: 100%;
                 aspect-ratio: 1/1;
-                border-radius: 40%;
+                border-radius: var(--launcher-icon-rounding);
             }
         }
     }

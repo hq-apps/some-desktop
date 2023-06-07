@@ -46,16 +46,17 @@
         top: 0;
         left: 0;
         display: flex;
-        background-color: rgba(255, 255, 255, 0.555);
-        backdrop-filter: blur(12px);
+        background-color: var(--panel-background);
+        backdrop-filter: blur(var(--panel-blur-radius));
         z-index: 5000;
         width: 100%;
         height: auto;
-        color: black;
+        color: var(--panel-color);
         justify-content: space-between;
-        font-family: "Inter", sans-serif;
-        padding: 8px;
+        font-family: var(--panel-font);
+        padding: var(--panel-padding);
         box-sizing: border-box;
+        border-radius: var(--panel-rounding);
 
         .panel-left,
         .panel-right {
