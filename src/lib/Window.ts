@@ -40,6 +40,7 @@ export let currentWindow: Store<WindowProperties | null> = store(null);
 
 function isWindowWithTag(tag: string) {
     const filtered = arrayOfWindows.get().filter(v => (v.tag == tag) && !v.closed)
+    if(filtered.length != 0) focusWindow(filtered[0].id)
     return filtered.length != 0
 }
 
