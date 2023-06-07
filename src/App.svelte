@@ -12,7 +12,7 @@
     import { showContextMenu, type contextMenuItem } from './lib/ContextMenu';
 
     setTimeout(() => {
-        newWindow();
+        newWindow({title: "Welcome", dockIcon: "/fallback.png"});
         // setTimeout(() => {
         //     newWindow({
         //         dockIcon: "/notz.png",
