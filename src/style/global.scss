@@ -6,9 +6,11 @@
     --color: black;
     --background-opaque: 255, 255, 255;
     --background-overlays: rgba(var(--background-opaque), 0.5);
+    --background-overlays-highlight: rgba(var(--background-opaque), 0.8);
     --rounding: 8px;
     --blur-radius: 12px;
     --font: "Inter", sans-serif;
+    --font-size: 1rem; // TODO
     --wallpaper: url("/wallpaper.jpg");
     --panel-background: var(--background-overlays);
     --panel-rounding: 0;
@@ -41,6 +43,30 @@
     --launcher-icon-size: 120px;
     --launcher-blur-radius: 24px;
     --launcher-font: var(--font);
+    --context-menu-background: var(--background-overlays);
+    --context-menu-color: var(--color);
+    --context-menu-rounding: 10px;
+    --context-menu-padding: 6px;
+    --context-menu-width: 170px;
+    --context-menu-icon-size: 0; // comming soon
+    --context-menu-blur-radius: var(--blur-radius);
+    --context-menu-item-background: var(--background-overlays);
+    --context-menu-item-rounding: 10px;
+    --context-menu-item-padding: 6px;
+    --context-menu-item-margin: 6px;
+    --context-menu-item-blur-radius: var(--context-menu-blur-radius);
+    --context-menu-font: var(--font);
+    --context-menu-font-size: var(--font-size);
+    --context-menu-item-hover-background: var(--background-overlays-highlight);
+    --context-menu-item-hover-rounding: 10px;
+    --context-menu-item-hover-padding: var(--context-menu-item-padding);
+    --context-menu-item-hover-blur-radius: var(--context-menu-blur-radius);
+    --context-menu-item-hover-color: var(--context-menu-color);
+    --context-menu-spacer-background: var(--background-overlays);
+    --context-menu-spacer-rounding: 10px;
+    --context-menu-spacer-height: 2px;
+    --context-menu-spacer-margin: 5px;
+    --context-menu-spacer-blur-radius: var(--blur-radius)
 }
 
 body {

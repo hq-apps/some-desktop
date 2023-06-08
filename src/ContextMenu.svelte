@@ -107,45 +107,55 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
     }
     .navbar {
         display: inline-flex;
-        width: 170px;
-        background-color: rgba(255, 255, 255, 0.589);
-        backdrop-filter: blur(20px);
-        border-radius: 10px;
+        width: var(--context-menu-width);
+        background-color: var(--context-menu-background);
+        backdrop-filter: blur(var(--context-menu-blur-radius));
+        border-radius: var(--context-menu-rounding);
         overflow: hidden;
         flex-direction: column;
     }
     .navbar ul {
-        margin: 6px;
+        margin: var(--context-menu-padding);
     }
     ul li {
         display: block;
         list-style-type: none;
         width: 1fr;
+        margin-top: var(--context-menu-item-margin);
+    }
+    ul li:first-child {
+        margin-top: 0;
     }
     ul li button {
-        font-size: 1rem;
-        color: #222;
+        font-size: var(--context-menu-font-size);
+        font-family: var(--context-menu-font);
+        color: var(--context-menu-color);
         width: 100%;
         height: 30px;
         text-align: left;
         border: 0px;
-        background-color: rgba(255, 255, 255, 0.589);
-        backdrop-filter: blur(20px);
-        border-radius: 10px;
+        background-color: var(--context-menu-item-background);
+        backdrop-filter: blur(var(--context-menu-item-blur-radius));
+        border-radius: var(--context-menu-item-rounding);
+        padding: var(--context-menu-item-padding);
     }
     ul li button:hover {
-        color: #000;
+        color: var(--context-menu-item-hover-color);
         text-align: left;
-        border-radius: 5px;
-        background-color: rgba(230, 230, 230, 0.589);
-        backdrop-filter: blur(20px);
+        border-radius: var(--context-menu-item-hover-rounding);
+        background-color: var(--context-menu-item-hover-background);
+        backdrop-filter: blur(var(--context-menu-item-hover-blur-radius));
+        padding: var(--context-menu-item-hover-padding);
     }
     :global(ul li button.info:hover) {
         color: navy;
     }
     hr {
-        background-color: rgba(255, 255, 255, 0.589);
-        backdrop-filter: blur(20px);
-        margin: 5px 0px;
+        background-color: var(--context-menu-spacer-background);
+        backdrop-filter: blur(var(--context-menu-spacer-blur-radius));
+        margin: var(--context-menu-spacer-margin);
+        height: var(--context-menu-spacer-height);
+        border: 0;
+        border-radius: var(--context-menu-spacer-rounding);
     }
 </style>
