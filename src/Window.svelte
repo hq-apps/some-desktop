@@ -48,15 +48,15 @@
     function onMouseMove(e: MouseEvent) {
         if (moving) {
             left += e.movementX;
-            top += e.movementY;
+            top = top + e.movementY > 35 ? top + e.movementY : 35;
         }
 
         if (resizing) {
             let delta: number;
             if (direction.match("top")) {
                 delta = initialPos.y - e.pageY;
-                top = initialRect.top - delta;
-                height = initialRect.height + delta;
+                top = e.pageY > 35 ? initialRect.top - delta : 35;
+                height = e.pageY > 35 ? initialRect.height + delta : initialRect.height + initialRect.top - 35;
             }
             if (direction.match("bottom")) {
                 delta = e.pageY - initialPos.y;
