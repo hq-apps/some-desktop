@@ -6,8 +6,19 @@ export interface contextMenuItem {
     displayText?: string
 }
 
+export interface contextMenuPos {
+    x: number,
+    y: number
+}
+
+export interface contextMenuSize {
+    width: number,
+    height: number
+}
+
 export let menuItems: Store<Array<contextMenuItem>> = store([]);
-export let pos: Store<Object> = store({x: 0, y: 0});
+export let pos: Store<contextMenuPos> = store({x: 0, y: 0});
+export let menu: Store<contextMenuSize> = store({width: 0, height: 0});
 export let showMenu: Store<boolean> = store(false);
 
 export function showContextMenu(e: MouseEvent, options: Array<contextMenuItem>) {
@@ -23,6 +34,11 @@ export function showContextMenu(e: MouseEvent, options: Array<contextMenuItem>) 
         h: window.innerHeight,
     };
 
-    //if (browser.h - pos.get().y < menu.h) pos.y = pos.y - menu.h;
-    //if (browser.w - pos.get().x < menu.w) pos.x = pos.x - menu.w;
+    console.log(browser)
+
+    const posnow = pos.get()
+    const menunow = menu.get()
+
+    if (browser.h - posnow.y < menunow.height) pos.update(p => { return { x: p.x, y: posnow.y - menunow.height } });
+    if (browser.w - posnow.x < menunow.width) pos.update(p => { return { x: posnow.x - menunow.width, y: p.y } });
 }

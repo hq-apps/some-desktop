@@ -17,12 +17,12 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
     import { newWindow } from "./lib/Window";
     import Settings from "./apps/Settings.svelte";
     import { launcherVisible } from "./lib/Launcher";
-    import { menuItems, pos, showMenu } from "./lib/ContextMenu";
+    import { menuItems, pos, showMenu, menu } from "./lib/ContextMenu";
 
     // pos is cursor position when right click occur
     //let pos = { x: 0, y: 0 };
     // menu is dimension (height and width) of context menu
-    let menu = { h: 0, w: 0 };
+    //let menu = { h: 0, w: 0 };
     // browser/window dimension (height and width)
     let browser = { h: 0, w: 0 };
     // showMenu is state of context-menu visibility
@@ -61,10 +61,10 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
         let height = node.offsetHeight;
         let width = node.offsetWidth;
         // @ts-ignore
-        menu = {
-            h: height,
-            w: width,
-        };
+        menu.set({
+            height: height,
+            width: width,
+        });
     }
 </script>
 
