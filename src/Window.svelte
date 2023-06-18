@@ -24,13 +24,15 @@
     let maximized = false;
     let lastBeforeMaximized = { l: left, t: top, w: width, h: height };
 
-    function onMouseDown() {
+    let initialOffset: { x: number; y: number };
+
+    function onMouseDown(e: PointerEvent) {
         moving = true;
-        console.log("down")
+        initialOffset = { x: e.offsetX, y: e.offsetY }
     }
     
     function onMouseDownShift(e: PointerEvent) {
-        if(e.shiftKey) moving = true;
+        if(e.shiftKey) moving = true; initialOffset = { x: e.offsetX, y: e.offsetY }
     }
 
     let initialPos: { x: number; y: number };
@@ -47,10 +49,10 @@
     };
 
     function onMouseMove(e: PointerEvent) {
-        console.log("move")
         if (moving) {
-            left += e.movementX;
-            top = top + e.movementY > 35 ? top + e.movementY : 35;
+            // this code was only rewritten cuz e.movementX/Y was missing undocumented in safari on iOS
+            left = e.pageX - initialOffset.x
+            top = e.pageY - initialOffset.y
         }
 
         if (resizing) {
@@ -327,6 +329,7 @@
         margin: 0;
         background-color: var(--window-content-background);
         height: 100%;
+        touch-action: none;
     }
 
     :global(.grabber) {
