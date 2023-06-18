@@ -26,9 +26,10 @@
 
     function onMouseDown() {
         moving = true;
+        console.log("down")
     }
     
-    function onMouseDownShift(e: MouseEvent) {
+    function onMouseDownShift(e: PointerEvent) {
         if(e.shiftKey) moving = true;
     }
 
@@ -45,7 +46,8 @@
         top,
     };
 
-    function onMouseMove(e: MouseEvent) {
+    function onMouseMove(e: PointerEvent) {
+        console.log("move")
         if (moving) {
             left += e.movementX;
             top = top + e.movementY > 35 ? top + e.movementY : 35;
@@ -93,7 +95,7 @@
         | "bottom-right"
         | null = null;
 
-    function onResize(event: MouseEvent) {
+    function onResize(event: PointerEvent) {
         if (direction == null) return;
         resizing = true;
         initialPos = { x: event.pageX, y: event.pageY };
@@ -147,9 +149,9 @@
         id="window-{id}"
         style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {zindex}"
         transition:scale
-        on:mousedown={(e) => {focusWindow(id); onMouseDownShift(e)}}
+        on:pointerdown={(e) => {focusWindow(id); onMouseDownShift(e)}}
     >
-        <div class="title draggable" on:mousedown={onMouseDown}>
+        <div class="title draggable" on:pointerdown={onMouseDown}>
             {#if windowIcon}
                 <img src={windowIcon} alt="icon" />
             {/if}
@@ -178,75 +180,76 @@
         </div>
         <div
             class="grabber right"
-            on:mouseenter={() => (direction = "right")}
-            on:mouseleave={() => {
+            on:pointerenter={() => (direction = "right")}
+            on:pointerleave={() => {
                 if (!resizing) direction = null;
             }}
-            on:mousedown={onResize}
+            on:pointerdown={onResize}
         />
         <div
             class="grabber left"
-            on:mouseenter={() => (direction = "left")}
-            on:mouseleave={() => {
+            on:pointerenter={() => (direction = "left")}
+            on:pointerleave={() => {
                 if (!resizing) direction = null;
             }}
-            on:mousedown={onResize}
+            on:pointerdown={onResize}
         />
         <div
             class="grabber top"
-            on:mouseenter={() => (direction = "top")}
-            on:mouseleave={() => {
+            on:pointerenter={() => (direction = "top")}
+            on:pointerleave={() => {
                 if (!resizing) direction = null;
             }}
-            on:mousedown={onResize}
+            on:pointerdown={onResize}
         />
         <div
             class="grabber bottom"
-            on:mouseenter={() => (direction = "bottom")}
-            on:mouseleave={() => {
+            on:pointerenter={() => (direction = "bottom")}
+            on:pointerleave={() => {
                 if (!resizing) direction = null;
             }}
-            on:mousedown={onResize}
+            on:pointerdown={onResize}
         />
         <div
             class="grabber top-left"
-            on:mouseenter={() => (direction = "top-left")}
-            on:mouseleave={() => {
+            on:pointerenter={() => (direction = "top-left")}
+            on:pointerleave={() => {
                 if (!resizing) direction = null;
             }}
-            on:mousedown={onResize}
+            on:pointerdown={onResize}
         />
         <div
             class="grabber top-right"
-            on:mouseenter={() => (direction = "top-right")}
-            on:mouseleave={() => {
+            on:pointerenter={() => (direction = "top-right")}
+            on:pointerleave={() => {
                 if (!resizing) direction = null;
             }}
-            on:mousedown={onResize}
+            on:pointerdown={onResize}
         />
         <div
             class="grabber bottom-left"
-            on:mouseenter={() => (direction = "bottom-left")}
-            on:mouseleave={() => {
+            on:pointerenter={() => (direction = "bottom-left")}
+            on:pointerleave={() => {
                 if (!resizing) direction = null;
             }}
-            on:mousedown={onResize}
+            on:pointerdown={onResize}
         />
         <div
             class="grabber bottom-right"
-            on:mouseenter={() => (direction = "bottom-right")}
-            on:mouseleave={() => {
+            on:pointerenter={() => (direction = "bottom-right")}
+            on:pointerleave={() => {
                 if (!resizing) direction = null;
             }}
-            on:mousedown={onResize}
+            on:pointerdown={onResize}
         />
     </div>
 {/if}
-<svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />
+<svelte:window on:pointermove={onMouseMove} on:pointerup={onMouseUp} on:pointercancel={() => console.log("cancel")}/>
 
 <style lang="scss">
     [class^="window"] {
         user-select: none;
+        -webkit-user-select: none;
         display: flex;
         flex-direction: column;
         font-family: var(--window-font);
@@ -261,6 +264,7 @@
         &:not(.content) {
             overflow: hidden;
         }
+        touch-action: none;
     }
     .title {
         display: flex;
@@ -268,6 +272,7 @@
         align-items: center;
         background: var(--window-title-background);
         backdrop-filter: blur(var(--window-blur-radius));
+        -webkit-backdrop-filter: blur(var(--window-blur-radius));
         padding: var(--window-title-padding);
 
         img {

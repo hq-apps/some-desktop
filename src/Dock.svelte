@@ -81,6 +81,8 @@
         border-radius: var(--border-radius);
         border-bottom-left-radius: var(--dock-rounding-bottom);
         border-bottom-right-radius: var(--dock-rounding-bottom);
+        user-select: none;
+        -webkit-user-select: none;
 
         .dock-icon {
             width: var(--icon-size);
@@ -110,6 +112,7 @@
         left: 50%;
         transform: translateX(-50%);
         backdrop-filter: blur(var(--dock-blur-radius));
+        -webkit-backdrop-filter: blur(var(--dock-blur-radius));
         z-index: 100000;
     }
 

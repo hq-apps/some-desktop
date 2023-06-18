@@ -69,10 +69,15 @@
     --context-menu-spacer-blur-radius: var(--blur-radius)
 }
 
+
+:root {
+    touch-action: none;
+}
 body {
     height: 100vh;
     background-image: var(--wallpaper);
     background-size: cover;
     margin: 0;
     overflow: hidden;
+    font-size: var(--font-size);
 }

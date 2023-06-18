@@ -48,6 +48,7 @@
         display: flex;
         background-color: var(--panel-background);
         backdrop-filter: blur(var(--panel-blur-radius));
+        -webkit-backdrop-filter: blur(var(--panel-blur-radius));
         z-index: 5000;
         width: 100%;
         height: auto;
@@ -57,6 +58,8 @@
         padding: var(--panel-padding);
         box-sizing: border-box;
         border-radius: var(--panel-rounding);
+        user-select: none;
+        -webkit-user-select: none;
 
         .panel-left,
         .panel-right {

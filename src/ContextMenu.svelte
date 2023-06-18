@@ -68,8 +68,6 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
     }
 </script>
 
-<div class="content" bind:this={content}>Right click somewhere!</div>
-
 {#if $showMenu}
     <nav
         use:getContextMenuDimension
@@ -110,6 +108,7 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
         width: var(--context-menu-width);
         background-color: var(--context-menu-background);
         backdrop-filter: blur(var(--context-menu-blur-radius));
+        -webkit-backdrop-filter: blur(var(--context-menu-blur-radius));
         border-radius: var(--context-menu-rounding);
         overflow: hidden;
         flex-direction: column;
@@ -136,6 +135,7 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
         border: 0px;
         background-color: var(--context-menu-item-background);
         backdrop-filter: blur(var(--context-menu-item-blur-radius));
+        -webkit-backdrop-filter: blur(var(--context-menu-item-blur-radius));
         border-radius: var(--context-menu-item-rounding);
         padding: var(--context-menu-item-padding);
     }
@@ -145,6 +145,7 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
         border-radius: var(--context-menu-item-hover-rounding);
         background-color: var(--context-menu-item-hover-background);
         backdrop-filter: blur(var(--context-menu-item-hover-blur-radius));
+        -webkit-backdrop-filter: blur(var(--context-menu-item-hover-blur-radius));
         padding: var(--context-menu-item-hover-padding);
     }
     :global(ul li button.info:hover) {
@@ -153,6 +154,7 @@ Inspired from: Context Menu https://svelte.dev/repl/3a33725c3adb4f57b46b597f9dad
     hr {
         background-color: var(--context-menu-spacer-background);
         backdrop-filter: blur(var(--context-menu-spacer-blur-radius));
+        -webkit-backdrop-filter: blur(var(--context-menu-spacer-blur-radius));
         margin: var(--context-menu-spacer-margin);
         height: var(--context-menu-spacer-height);
         border: 0;

@@ -50,6 +50,7 @@
 
     #launcher {
         backdrop-filter: blur(var(--launcher-blur-radius));
+        -webkit-backdrop-filter: blur(var(--launcher-blur-radius));
         width: 100%;
         height: 100vh;
         display: flex;
