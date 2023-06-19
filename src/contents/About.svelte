@@ -7,6 +7,7 @@
     import Resources from "./about/Resources.svelte";
     import Storage from "./about/Storage.svelte";
     import Support from "./about/Support.svelte";
+    import SingleColumnTemplate from "../ui/SingleColumnTemplate.svelte";
 
     let items = [
 		{ label: "Overview", value: 1, component: Overview },
@@ -17,5 +18,6 @@
         { label: "Resources", value: 6, component: Resources },
 	];
 </script>
-
-<TabView {items} />
+<SingleColumnTemplate>
+  <TabView {items} />
+</SingleColumnTemplate>

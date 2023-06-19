@@ -19,8 +19,8 @@
             title: "About MEC OS XXX",
             dockIcon: "//hqapps.org/icens/96.png",
             closeOnly: true,
-            width: 600,
-            height: 350,
+            width: 675,
+            height: 360,
             tag: "about-mec",
             openOnce: true
         });

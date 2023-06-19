@@ -24,7 +24,7 @@
     --dock-padding: 9px;
     --dock-icon-size: 96px;
     --dock-blur-radius: var(--blur-radius);
-    --window-title-background: var(--background-overlays);
+    --window-title-background: rgba(var(--background-opaque), 0.6);
     --window-rounding: 15px;
     --window-title-padding: 10px;
     --window-icon-size: 24px;
@@ -66,7 +66,20 @@
     --context-menu-spacer-rounding: 10px;
     --context-menu-spacer-height: 2px;
     --context-menu-spacer-margin: 5px;
-    --context-menu-spacer-blur-radius: var(--blur-radius)
+    --context-menu-spacer-blur-radius: var(--blur-radius);
+    --sidebar-background: var(--background-overlays);
+    --sidebar-blur-radius: var(--blur-radius);
+    --sidebar-width: 14em;
+    --sidebar-color: var(--color);
+    --sidebar-template-content-background: white;
+    --sidebar-template-content-rounding: var(--window-rounding);
+    --sidebar-list-element-rounding: var(--rounding);
+    --sidebar-list-element-background: transparent;
+    --sidebar-list-element-background-active: rgb(47, 47, 238);
+    --sidebar-list-element-color: var(--sidebar-color);
+    --sidebar-list-element-color-active: white;
+    --sidebar-list-element-padding: 0.5em;
+    --sidebar-list-element-margin: 0.5em;
 }
 
 

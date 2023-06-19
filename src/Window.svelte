@@ -25,10 +25,10 @@
     let lastBeforeMaximized = { l: left, t: top, w: width, h: height };
 
     let initialOffset: { x: number; y: number };
+    let wasMoving = false;
 
-    function onMouseDown(e: PointerEvent) {
+    function onMouseDown() {
         moving = true;
-        initialOffset = { x: e.offsetX, y: e.offsetY }
     }
     
     function onMouseDownShift(e: PointerEvent) {
@@ -48,11 +48,17 @@
         top,
     };
 
-    function onMouseMove(e: PointerEvent) {
+    async function onMouseMove(e: PointerEvent) {
         if (moving) {
             // this code was only rewritten cuz e.movementX/Y was missing undocumented in safari on iOS
+            if(!wasMoving) {
+                initialOffset = { x: e.offsetX, y: e.offsetY };
+                wasMoving = true;
+            }
             left = e.pageX - initialOffset.x
             top = e.pageY - initialOffset.y
+        } else {
+            wasMoving = false
         }
 
         if (resizing) {
@@ -267,14 +273,14 @@
             overflow: hidden;
         }
         touch-action: none;
+        background: var(--window-title-background);
+        backdrop-filter: blur(var(--window-blur-radius));
+        -webkit-backdrop-filter: blur(var(--window-blur-radius));
     }
     .title {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: var(--window-title-background);
-        backdrop-filter: blur(var(--window-blur-radius));
-        -webkit-backdrop-filter: blur(var(--window-blur-radius));
         padding: var(--window-title-padding);
 
         img {
@@ -327,9 +333,10 @@
 
     .content {
         margin: 0;
-        background-color: var(--window-content-background);
+        // background-color: var(--window-content-background);
         height: 100%;
         touch-action: none;
+        position: relative;
     }
 
     :global(.grabber) {

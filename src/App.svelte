@@ -12,7 +12,7 @@
     import { showContextMenu, type contextMenuItem } from './lib/ContextMenu';
 
     setTimeout(() => {
-        newWindow({title: "Welcome", dockIcon: "/fallback.png"});
+        newWindow({title: "Welcome", dockIcon: "/fallback.png", width: 800});
         // setTimeout(() => {
         //     newWindow({
         //         dockIcon: "/notz.png",
@@ -47,7 +47,7 @@
             title: "setingz",
             com: Settings,
             dockIcon: "/notz.png",
-            width: 200,
+            width: 550,
             height: 300,
         });
     }

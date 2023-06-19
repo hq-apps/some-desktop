@@ -29,7 +29,7 @@
 
 <style lang="scss">
     .tabview {
-        margin: 8px;
+        padding: 8px;
     }
     .box {
         padding-top: 8px;
