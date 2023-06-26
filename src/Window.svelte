@@ -30,6 +30,7 @@
     let wasMoving = false;
 
     function onMouseDown() {
+        if(maximized) return;
         moving = true;
     }
     
@@ -117,6 +118,8 @@
         };
     }
 
+    let maximizeAnimation = false;
+
     function onMaximize() {
         if (!maximized) {
             lastBeforeMaximized = {
@@ -127,6 +130,7 @@
             };
 
             maximized = true;
+            maximizeAnimation = true;
             top = 20;
             left = 0;
             width = Math.max(
@@ -143,6 +147,7 @@
             left = lastBeforeMaximized.l;
             width = lastBeforeMaximized.w;
             height = lastBeforeMaximized.h;
+            setTimeout(() => {maximizeAnimation = false;}, 500)
         }
     }
     let dockIconLocation = {x: 0, y: 0};
@@ -164,7 +169,7 @@
 <p>resizing: {resizing}; direction: {direction}; moving: {moving};</p> -->
 {#if !closed}
     <div
-        class="window-{id} {maximized ? 'max' : ''} {minimized ? 'minimized' : ''}"
+        class="window-{id} {maximized ? 'max' : ''} {maximizeAnimation ? 'max-animation' : ''} {minimized ? 'minimized' : ''}"
         id="window-{id}"
         style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {zindex}; --dock-icon-location-x: {dockIconLocation.x}px; --dock-icon-location-y: {dockIconLocation.y}px;"
         transition:scale
@@ -437,6 +442,10 @@
 
     .max {
         border-radius: 0;
+    }
+
+    .max-animation {
+        transition: top 500ms, left 500ms, width 500ms, height 500ms, border-radius 500ms;
     }
 
     @keyframes minimize {
