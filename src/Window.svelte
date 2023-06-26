@@ -168,12 +168,14 @@
                 <p
                     class="action-button close"
                     on:click={() => closeWindow(id)}
+                    on:pointerdown={() => closeWindow(id)}
                     on:keydown={() => closeWindow(id)}
                 />
                 {#if !closeOnly}
                     <p
                         class="action-button maximize"
                         on:click={onMaximize}
+                        on:pointerdown={onMaximize}
                         on:keydown={onMaximize}
                     />
                     <p class="action-button minimize" />
