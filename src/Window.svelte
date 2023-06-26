@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dockIconLocations } from './lib/Dock';
     import { scale } from "svelte/transition";
     import { closeWindow, focusWindow } from "./lib/Window";
 
@@ -20,6 +21,7 @@
     let height = initHeight;
 
     export let closed: boolean = false;
+    export let minimized: boolean = false;
     let moving = false;
     let maximized = false;
     let lastBeforeMaximized = { l: left, t: top, w: width, h: height };
@@ -143,6 +145,15 @@
             height = lastBeforeMaximized.h;
         }
     }
+    let dockIconLocation = {x: 0, y: 0};
+
+    function onMinimize(id: string) {
+        const location = dockIconLocations.get().filter(l => l.id === id)[0];
+        dockIconLocation = {x: Math.floor(location.x - location.width / 2 - (width/2) + 100 - left), y: Math.floor(location.y - location.height / 2 - (height/2) + 100 - top)};
+
+        console.log("location: ", dockIconLocation);
+        minimized = true;
+    }
 </script>
 
 <!-- <p>
@@ -153,9 +164,9 @@
 <p>resizing: {resizing}; direction: {direction}; moving: {moving};</p> -->
 {#if !closed}
     <div
-        class="window-{id} {maximized ? 'max' : ''}"
+        class="window-{id} {maximized ? 'max' : ''} {minimized ? 'minimized' : ''}"
         id="window-{id}"
-        style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {zindex}"
+        style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {zindex}; --dock-icon-location-x: {dockIconLocation.x}px; --dock-icon-location-y: {dockIconLocation.y}px;"
         transition:scale
         on:pointerdown={(e) => {focusWindow(id); onMouseDownShift(e)}}
     >
@@ -178,7 +189,11 @@
                         on:pointerdown={onMaximize}
                         on:keydown={onMaximize}
                     />
-                    <p class="action-button minimize" />
+                    <p class="action-button minimize"
+                        on:click={() => onMinimize(id)}
+                        on:pointerdown={() => onMinimize(id)}
+                        on:keydown={() => onMinimize(id)}
+                    />
                 {/if}
             </div>
         </div>
@@ -278,6 +293,7 @@
         background: var(--window-title-background);
         backdrop-filter: blur(var(--window-blur-radius));
         -webkit-backdrop-filter: blur(var(--window-blur-radius));
+        transition: transform 500ms, opacity 500ms;
     }
     .title {
         display: flex;
@@ -421,5 +437,18 @@
 
     .max {
         border-radius: 0;
+    }
+
+    @keyframes minimize {
+        from {
+            transform: translate(0, 0);
+        }
+        to {
+            
+        }
+    }
+    .minimized {
+        transform: translate(var(--dock-icon-location-x), var(--dock-icon-location-y)) scale(0.1);
+        opacity: 0;
     }
 </style>

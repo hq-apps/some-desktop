@@ -17,6 +17,7 @@ export interface WindowProperties {
     scrollBar: boolean;
     closed?: boolean;
     tag: string;
+    minimized?: boolean;
 }
 
 export interface WindowOption {
@@ -106,6 +107,7 @@ export function focusWindow(id: string) {
                 currentZ.set(z)
                 currentWindow.set(elm);
                 u[i].zindex = z;
+                u[i].minimized = false;
             }
         }
         return u;

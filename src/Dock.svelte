@@ -3,6 +3,8 @@
     import { focusWindow } from "./lib/Window";
     import { appArray, appHasWindow } from "./lib/Apps";
     import { launcherVisible } from "./lib/Launcher";
+    import { dockIconLocations, type dockIconLocationsProps } from "./lib/Dock";
+    import About from "./contents/About.svelte";
 
     interface WindowProperties {
         id: string;
@@ -26,9 +28,28 @@
     function showLauncher() {
         launcherVisible.update(v => !v)
     }
+
+    let dockIcons: HTMLDivElement;
+
+    function updateIconLocations() {
+        if(!dockIcons) return;
+        const icons: any[] = [...dockIcons.querySelectorAll(".dock-icon")];
+        dockIconLocations.set(icons.map(element => {
+            const box = element.getBoundingClientRect()
+            return {
+                id: element.dataset.wid || null,
+                x: box.x,
+                y: box.y,
+                width: box.width,
+                height: box.height
+            }
+        }));
+    }
+    $:updateIconLocations()
+    setInterval(updateIconLocations, 1000)
 </script>
 
-<div class="dock">
+<div class="dock" bind:this={dockIcons}>
     <div class="dock-icon" on:click={showLauncher} on:keydown={showLauncher} style="background-color: #111;">
         <img src="/hom.svg" alt="dock" />
     </div>
@@ -47,6 +68,7 @@
         <div class="dock-icon-wrapper">
             <div
                 class="dock-icon"
+                data-wid={w.id}
                 on:click={() => focusWindow(w.id)}
                 on:keydown={() => focusWindow(w.id)}
             >

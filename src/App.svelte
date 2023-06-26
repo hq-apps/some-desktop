@@ -75,6 +75,14 @@
             onClick: launcher,
             displayText: "AppsLauncher",
         },
+        {
+            name: "hr",
+        },
+        {
+            name: "FullScreen",
+            onClick: () => document.documentElement.requestFullscreen(),
+            displayText: "Full Screen",
+        },
     ];
 </script>
 
@@ -93,6 +101,7 @@
         initLeft={w.left}
         scrollbar={w.scrollBar}
         closed={w.closed}
+        bind:minimized={w.minimized}
     >
         <svelte:component this={w.com} prop={{}} />
     </Window>
