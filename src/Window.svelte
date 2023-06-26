@@ -59,7 +59,8 @@
                 wasMoving = true;
             }
             left = e.pageX - initialOffset.x
-            top = e.pageY - initialOffset.y
+            const topNew = e.pageY - initialOffset.y
+            top = topNew > 35 ? topNew : 35;
         } else {
             wasMoving = false
         }
