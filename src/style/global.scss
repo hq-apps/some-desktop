@@ -37,6 +37,8 @@
     --window-minimize-color-hover: rgb(255, 255, 60);
     --window-content-background: rgb(250, 238, 238);
     --window-font: var(--font);
+    --window-border-image: linear-gradient(0deg, rgba(194,194,194,0.8001401244091386) 0%, rgba(255,255,255,0.6) 5%, rgba(255,255,255,0.6012605725884104) 95%, rgba(255,255,255,0.9) 100%);
+    --window-border-width: 1px;
     --launcher-wallpaper: var(--wallpaper);
     --launcher-background: none;
     --launcher-icon-rounding: 40%;
