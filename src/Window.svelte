@@ -2,6 +2,7 @@
 	import { dockIconLocations } from './lib/Dock';
     import { scale } from "svelte/transition";
     import { closeWindow, focusWindow } from "./lib/Window";
+    import { sleep } from './lib/Util';
 
     export let id: string;
     export let title: string;
@@ -27,10 +28,11 @@
     let lastBeforeMaximized = { l: left, t: top, w: width, h: height };
 
     let initialOffset: { x: number; y: number };
-    let wasMoving = false;
 
-    function onMouseDown() {
+    function onMouseDown(e: PointerEvent) {
+        initialOffset = { x: e.offsetX, y: e.offsetY };
         if(maximized) return;
+        sleep(100)
         moving = true;
     }
     
@@ -54,15 +56,11 @@
     async function onMouseMove(e: PointerEvent) {
         if (moving) {
             // this code was only rewritten cuz e.movementX/Y was missing undocumented in safari on iOS
-            if(!wasMoving) {
-                initialOffset = { x: e.offsetX, y: e.offsetY };
-                wasMoving = true;
-            }
-            left = e.pageX - initialOffset.x
+            const leftNew = e.pageX - initialOffset.x
+            if(leftNew == (left += e.movementX)) left = leftNew
+            if(!e.movementX) left = leftNew
             const topNew = e.pageY - initialOffset.y
             top = topNew > 35 ? topNew : 35;
-        } else {
-            wasMoving = false
         }
 
         if (resizing) {
