@@ -169,6 +169,10 @@
 </p>
 <p>resizing: {resizing}; direction: {direction}; moving: {moving};</p> -->
 {#if !closed}
+    <div 
+        class="ghost-window"
+        style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {zindex};"
+    ></div>
     <div
         class="window-{id} {maximized ? 'max' : ''} {maximizeAnimation ? 'max-animation' : ''} {minimized ? 'minimized' : ''}"
         id="window-{id}"
@@ -446,7 +450,7 @@
     }
 
     .max-animation {
-        transition: top 500ms, left 500ms, width 500ms, height 500ms, border-radius 500ms;
+        transition: top 500ms, left 500ms, width 500ms, height 500ms, border-radius 500ms, transform 500ms, opacity 500ms;
     }
 
     @keyframes minimize {
