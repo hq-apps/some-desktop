@@ -60,7 +60,9 @@
             if(leftNew == (left += e.movementX)) left = leftNew
             if(!e.movementX) left = leftNew
             const topNew = e.pageY - initialOffset.y
-            top = topNew > 35 ? topNew : 35;
+            const topNewNew = topNew > 35 ? topNew : 35;
+            if(topNew == (top += e.movementY)) top = topNewNew
+            if(!e.movementY) top = topNewNew
         }
 
         if (resizing) {
