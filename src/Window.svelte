@@ -31,9 +31,14 @@
 
     function onMouseDown(e: PointerEvent) {
         initialOffset = { x: e.offsetX, y: e.offsetY };
-        if(maximized) return;
         sleep(100)
         moving = true;
+        if(!maximized) lastBeforeMaximized = {
+                l: left,
+                t: top,
+                w: width,
+                h: height,
+        };
     }
     
     function onMouseDownShift(e: PointerEvent) {
@@ -53,6 +58,19 @@
         top,
     };
 
+    let touchesTop = false;
+    let showGhost = false;
+
+    function checkHotActions() {
+        if(top < 36) {
+            touchesTop = true;
+            showGhost = true;
+        } else {
+            touchesTop = false;
+            setTimeout(() => {showGhost = false}, 500);
+        }
+    }
+
     async function onMouseMove(e: PointerEvent) {
         if (moving) {
             // this code was only rewritten cuz e.movementX/Y was missing undocumented in safari on iOS
@@ -60,9 +78,15 @@
             if(leftNew == (left += e.movementX)) left = leftNew
             if(!e.movementX) left = leftNew
             const topNew = e.pageY - initialOffset.y
-            const topNewNew = topNew > 35 ? topNew : 35;
-            if(topNew == (top += e.movementY)) top = topNewNew
-            if(!e.movementY) top = topNewNew
+            //const topNewNew = topNew > 35 ? topNew : 35;
+            if(topNew == (top += e.movementY)) top = topNew
+            if(!e.movementY) top = topNew
+
+            checkHotActions();
+        }
+
+        if(top > 36 && maximized) {
+            demaximize();
         }
 
         if (resizing) {
@@ -89,6 +113,10 @@
     }
 
     function onMouseUp() {
+        checkHotActions();
+        if(top < 36 && moving) {
+            maximize(true);
+        }
         moving = false;
         if (resizing) {
             resizing = false;
@@ -121,34 +149,44 @@
 
     let maximizeAnimation = false;
 
-    function onMaximize() {
-        if (!maximized) {
-            lastBeforeMaximized = {
+    function maximize(triggeredByGesture) {
+        if (!triggeredByGesture) lastBeforeMaximized = {
                 l: left,
                 t: top,
                 w: width,
                 h: height,
             };
 
-            maximized = true;
-            maximizeAnimation = true;
-            top = 20;
-            left = 0;
-            width = Math.max(
-                document.body.scrollWidth,
-                document.body.offsetWidth
-            );
-            height = Math.max(
-                document.body.scrollHeight,
-                document.body.offsetHeight
-            );
-        } else {
-            maximized = false;
+        maximized = true;
+        maximizeAnimation = true;
+        setTimeout(() => maximizeAnimation = false, 500);
+        top = 35;
+        left = 0;
+        width = Math.max(
+            document.body.scrollWidth,
+            document.body.offsetWidth
+        );
+        height = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight
+        );
+    }
+    
+    function demaximize() {
+        maximized = false;
             top = lastBeforeMaximized.t;
             left = lastBeforeMaximized.l;
             width = lastBeforeMaximized.w;
             height = lastBeforeMaximized.h;
             setTimeout(() => {maximizeAnimation = false;}, 500)
+            checkHotActions();
+    }
+
+    function onMaximize(_, triggeredByGesture?: boolean) {
+        if (!maximized) {
+            maximize(triggeredByGesture);
+        } else {
+            demaximize();
         }
     }
     let dockIconLocation = {x: 0, y: 0};
@@ -170,8 +208,8 @@
 <p>resizing: {resizing}; direction: {direction}; moving: {moving};</p> -->
 {#if !closed}
     <div 
-        class="ghost-window"
-        style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {zindex};"
+        class="ghost-window {touchesTop ? 'maximize' : ''} {showGhost ? 'show' : ''}"
+        style="--left: {left}px; --top: {top}px; width: {width}px; height: {height}px; z-index: {zindex};"
     ></div>
     <div
         class="window-{id} {maximized ? 'max' : ''} {maximizeAnimation ? 'max-animation' : ''} {minimized ? 'minimized' : ''}"
@@ -304,6 +342,27 @@
         backdrop-filter: blur(var(--window-blur-radius));
         -webkit-backdrop-filter: blur(var(--window-blur-radius));
         transition: transform 500ms, opacity 500ms;
+    }
+    .ghost-window {
+        position: absolute;
+        border-radius: var(--window-rounding);
+        top: var(--top);
+        left: var(--left);
+        background-color: var(--window-title-background);
+        backdrop-filter: blur(var(--window-blur-radius));
+        opacity: 0;
+        transition: width 500ms, height 500ms, top 500ms, left 500ms, opacity 250ms;
+        &.show {
+            opacity: 1;
+            
+        }
+        &.maximize {
+            width: calc(100% - 20px) !important;
+            height: calc(100% - 20px - var(--panel-padding)*2 - 1em) !important;
+            top: calc(10px + var(--panel-padding)*2 + 1em) !important;
+            left: 10px !important;
+            //transform: translate(calc(var(--left) * -1 + 10px), calc(var(--top) * -1 + 10px + var(--panel-padding)*2 + 1em));
+        }
     }
     .title {
         display: flex;
