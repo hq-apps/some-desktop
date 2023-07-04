@@ -67,7 +67,7 @@
             showGhost = true;
         } else {
             touchesTop = false;
-            setTimeout(() => {showGhost = false}, 500);
+            showGhost = false;
         }
     }
 
